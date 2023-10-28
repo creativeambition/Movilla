@@ -1,4 +1,4 @@
-.mobile_nav {
+.mobile_navigation {
   position: fixed;
   bottom: 0;
   width: 100%;
@@ -8,7 +8,7 @@
   --radius: 20px;
   border-top-right-radius: var(--radius);
   border-top-left-radius: var(--radius);
-  border: 2px solid var(--clr-alt);
+  border: 1.5px solid var(--clr-alt);
   border-bottom: transparent;
   transform: translate(0, 100%);
   transition: 0.3s ease;
@@ -30,11 +30,25 @@
   }
 
   .mobile_nav_icons {
+    position: relative;
     display: flex;
     gap: 5px;
+
+    .indicator {
+      position: absolute;
+      height: 5px;
+      width: 12px;
+      background-color: var(--clr-pri);
+      z-index: 1;
+      bottom: 0;
+      border-radius: 100px;
+      transform: translate(-50%);
+      transition: 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+    }
   }
 
   .theme_options {
+    position: relative;
     margin-top: 20px;
     display: flex;
     flex-direction: column;
@@ -43,6 +57,13 @@
     span {
       color: var(--txt-clr-sec);
       margin-left: 5px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+
+      .icon {
+        font-size: 20px;
+      }
     }
 
     .theme_colors {
@@ -50,7 +71,7 @@
       gap: 15px;
 
       .theme {
-        height: 30px;
+        height: 25px;
         aspect-ratio: 1;
         background-color: var(--custom-clr);
         border: 2px solid var(--clr-alt);

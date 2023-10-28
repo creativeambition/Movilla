@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&family=Roboto+Condensed:wght@400;700&family=Playball&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&family=Roboto+Condensed:wght@400;700&family=Playball&display=swap");
 
 * {
   margin: 0;
@@ -32,18 +32,20 @@
 
   --clr-pri: #af078b;
   --clr-sec: #bd5086;
+
+  --clr-pri: #18a3a5;
+  --clr-sec: #14c6c0;
+
   --clr-alt: #ffffff1a;
 
   --pc-left-pos: 50px;
   --mobile-left-pos: 0;
 
   &.light_theme {
-    --bg-dark: #849ec5;
-    --bg-light: #bdcce4;
+    --bg-dark: #cacaca;
+    --bg-light: #ddddde;
 
     --clr-alt: #00000023;
-    --clr-sec: #9a0695;
-    --clr-pri: #dd5a9b;
 
     --txt-clr-pri: #000000;
     --txt-clr-sec: #000000a8;

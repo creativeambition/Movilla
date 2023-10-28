@@ -12,9 +12,11 @@ import { BiShareAlt, BiStar } from "react-icons/bi";
 import { GoShare } from "react-icons/go";
 import { FiBookmark } from "react-icons/fi";
 import { FaChevronLeft } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const SingleMovie = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="single_movie_page">
       <div className="movie_banner">
@@ -22,9 +24,12 @@ const SingleMovie = () => {
       </div>
 
       <header>
-        <Link to="/" className="return">
-          <FaChevronLeft className="action_icon" />
-        </Link>
+        <FaChevronLeft
+          className="return action_icon"
+          onClick={() => {
+            navigate(-1);
+          }}
+        />
 
         <h2 className="movie_title">AVENGERS: INFINITY WAR</h2>
 
@@ -52,7 +57,7 @@ const SingleMovie = () => {
         <MovieDetails />
 
         <div className="cast_section">
-          <span>Cast</span>
+          <p className="section_title">Cast</p>
 
           <div className="casts">
             <div className="wrapper">
@@ -83,7 +88,7 @@ const SingleMovie = () => {
 
         <div className="more_info">
           <section className="similar_movies">
-            <span className="section_title">Similar</span>
+            <p className="section_title">Similar</p>
 
             <div className="wrapper">
               <Movie movie_banner={dune} type="small" link="/movie/id" />
@@ -96,8 +101,8 @@ const SingleMovie = () => {
             </div>
           </section>
 
-          <div className="overview">
-            <span>Overview</span>
+          <div className="meta_data">
+            <p className="section_title">More info | Meta Data</p>
 
             <section>
               <div className="x">

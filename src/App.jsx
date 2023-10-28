@@ -7,7 +7,9 @@ import { SharedContext } from "./SharedContext";
 import { Outlet } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Profile from "./components/Profile/Profile";
-const MobileNav = lazy(() => import("./components/MobileNavigation/MobileNav"));
+const MobileNavigation = lazy(() =>
+  import("./components/MobileNavigation/MobileNavigation")
+);
 
 function App() {
   const [theme, settheme] = useState("default");
@@ -74,7 +76,7 @@ function App() {
       >
         {mobileView ? (
           <Suspense fallback="">
-            <MobileNav />
+            <MobileNavigation />
           </Suspense>
         ) : (
           <Navigation />

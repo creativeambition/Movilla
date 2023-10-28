@@ -1,25 +1,32 @@
-import "./MobileNav.scss";
+import "./MobileNavigation.scss";
 import { RiHome5Line } from "react-icons/ri";
 import { FiTv } from "react-icons/fi";
 import { BiLibrary, BiMovie } from "react-icons/bi";
-import Icon from "./Icon/Icon";
+import MobileNavIcon from "./MobileNavIcon/MobileNavIcon";
 import { useContext } from "react";
 import { SharedContext } from "../../SharedContext";
 
-const MobileNav = () => {
+import { MdOutlineFormatPaint } from "react-icons/md";
+
+const MobileNavigation = () => {
   const { NavActive } = useContext(SharedContext);
 
   return (
-    <div className={`mobile_nav ${NavActive && "active"}`}>
+    <div className={`mobile_navigation ${NavActive && "active"}`}>
       <div className="mobile_nav_icons">
-        <Icon Icon={RiHome5Line} title="Home" active link="/" />
-        <Icon Icon={BiMovie} title="Movies" link="movies" />
-        <Icon Icon={FiTv} title="TV Shows" link="tv-shows" />
-        <Icon Icon={BiLibrary} title="Library" link="lib" />
+        <div className="indicator"></div>
+
+        <MobileNavIcon Icon={RiHome5Line} title="Home" link="/" index={0} />
+        <MobileNavIcon Icon={BiMovie} title="Movies" link="movies" index={1} />
+        <MobileNavIcon Icon={FiTv} title="TV Shows" link="tv-shows" index={2} />
+        <MobileNavIcon Icon={BiLibrary} title="Library" link="lib" index={3} />
       </div>
 
       <div className="theme_options">
-        <span>Change Theme</span>
+        <span>
+          <MdOutlineFormatPaint className="icon" />
+          Change Theme
+        </span>
 
         <div className="theme_colors">
           <div
@@ -52,4 +59,4 @@ const MobileNav = () => {
   );
 };
 
-export default MobileNav;
+export default MobileNavigation;

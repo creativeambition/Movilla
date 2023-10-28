@@ -6,11 +6,13 @@ import Fav from "./RoutePages/Favorites/Fav";
 import Lib from "./RoutePages/Library/Lib";
 import SingleMovie from "./RoutePages/SingleMovie/SingleMovie";
 import TVShows from "./RoutePages/TVShows/TVShows";
+import Error from "./RoutePages/ErrorPage/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <Error />,
 
     children: [
       {

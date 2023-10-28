@@ -5,7 +5,7 @@ const Cast = ({ avatar }) => {
     <div className="cast">
       <img src={avatar} alt="" />
 
-      <h4 className="name">Chris Hemsworth</h4>
+      <span className="name">Chris Hemsworth</span>
     </div>
   );
 };

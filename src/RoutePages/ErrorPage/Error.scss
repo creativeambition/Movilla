@@ -1,0 +1,35 @@
+.error-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background-color: #1a1a25;
+  color: #ffffff;
+  font-family: poppins;
+
+  h3 {
+    font-size: 40px;
+    font-weight: normal;
+    font-family: "Recoleta DEMO";
+  }
+
+  p {
+    opacity: 0.6;
+  }
+
+  button {
+    padding: 15px 50px;
+    border-radius: 100px;
+    margin: 50px;
+    cursor: pointer;
+    font-size: 18px;
+    border: none;
+    font-family: "Recoleta DEMO";
+    transition: 0.2s ease;
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+}

@@ -7,14 +7,45 @@
   z-index: 2;
 
   .movie_overview {
+    position: relative;
     font-size: 16px;
-    line-height: 20px;
+    line-height: 25px;
     color: var(--txt-clr-sec);
     margin-top: 5px;
+    letter-spacing: 1px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 4;
     overflow: hidden;
+
+    &.expand {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &.expand .show_more {
+      position: static;
+      margin-top: 15px;
+    }
+
+    .show_more {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      left: 0;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        var(--bg-dark),
+        transparent
+      );
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 5px 10px;
+      border-bottom: 1px solid var(--clr-alt);
+      cursor: pointer;
+    }
   }
 
   .movie_info {

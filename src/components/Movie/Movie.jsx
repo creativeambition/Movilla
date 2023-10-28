@@ -16,6 +16,15 @@ const Movie = ({ movie_banner, type, link }) => {
 
       <div className="details">
         <span className="title">TITLE</span>
+        {type == "fill_width" && (
+          <p className="desc">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae
+            deleniti provident ad? Inventore blanditiis consequuntur laudantium
+            asperiores, officiis quo odit. Saepe exercitationem laudantium iste
+            dolor nulla excepturi atque aperiam quos. Eaque dolores repellat eum
+            numquam corrupti exercitationem aspernatur velit!
+          </p>
+        )}
 
         <MovieInfo />
       </div>
