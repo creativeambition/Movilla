@@ -1,0 +1,25 @@
+.movie_details {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+  align-items: flex-start;
+  width: min(100%, 700px);
+  z-index: 2;
+
+  .movie_overview {
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--txt-clr-sec);
+    margin-top: 5px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+  }
+
+  .movie_info {
+    margin: 15px 0 5px;
+    width: 100%;
+    justify-content: flex-start;
+  }
+}

@@ -1,0 +1,45 @@
+.genre {
+  min-width: 180px;
+  aspect-ratio: 2/1;
+  overflow: hidden;
+  background-color: var(--bg-dark);
+  border: 1px solid var(--clr-alt);
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  scroll-snap-align: center;
+  transition: 0.5s ease;
+
+  span {
+    position: absolute;
+    color: var(--txt-clr-pri);
+    z-index: 1;
+  }
+
+  &::after {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-color: var(--bg-dark);
+    opacity: 0.6;
+    transition: 0.3s ease;
+  }
+
+  &:hover::after {
+    opacity: 0.2;
+  }
+
+  &:hover img {
+    transform: scale(1.05);
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 1s ease;
+  }
+}
