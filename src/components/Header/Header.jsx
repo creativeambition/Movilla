@@ -21,7 +21,7 @@ const Header = () => {
     const header = document.querySelector(".app_header");
     const app = document.querySelector(".app main");
 
-    function handleHeader() {
+    function updateHeaderBgOnScroll() {
       if (app.scrollTop > 400) {
         header.classList.add("colorize");
       } else {
@@ -29,8 +29,8 @@ const Header = () => {
       }
     }
 
-    handleHeader();
-    app.addEventListener("scroll", handleHeader);
+    updateHeaderBgOnScroll();
+    app.addEventListener("scroll", updateHeaderBgOnScroll);
   }, []);
 
   useEffect(() => {
@@ -71,6 +71,7 @@ const Header = () => {
         <div className={`search field ${ActivateSearch && "active"}`}>
           <input
             type="text"
+            name="search"
             placeholder="Search..."
             value={SearchValue}
             disabled={!ActivateSearch}

@@ -1,4 +1,3 @@
-import "./Movies.scss";
 import Movie from "../../components/Movie/Movie";
 import avengers from "../../assets/movies/avengers.png";
 import spider from "../../assets/movies/spider.jpg";
@@ -378,26 +377,25 @@ const Movies = () => {
 
       <section className="section">
         <header>
-          <span className="section_title">Upcoming</span>
+          <span className="section_title">New Releases</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="long" link="/movie/id" />
-          <Movie movie_banner={spider} type="long" link="/movie/id" />
-          <Movie movie_banner={witcher} type="long" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="/movie/id" />
-          <Movie movie_banner={avengers} type="long" link="/movie/id" />
-          <Movie movie_banner={mario} type="long" link="/movie/id" />
-          <Movie movie_banner={spider} type="long" link="/movie/id" />
-          <Movie movie_banner={witcher} type="long" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="/movie/id" />
-          <Movie movie_banner={avengers} type="long" link="/movie/id" />
+          <Movie movie_banner={mario} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={spider} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={witcher} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={mario} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={spider} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={witcher} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={avengers} type="fill_width" link="/movie/id" />
         </div>
       </section>
 
       <section className="section">
         <header>
-          <span className="section_title">New Releases</span>
+          <span className="section_title">Upcoming</span>
         </header>
 
         <div className="movies_wrapper">
@@ -409,6 +407,7 @@ const Movies = () => {
             type="large_square"
             link="/movie/id"
           />
+          <Movie movie_banner={avengers} type="large_square" link="/movie/id" />
           <Movie movie_banner={mario} type="large_square" link="/movie/id" />
           <Movie movie_banner={spider} type="large_square" link="/movie/id" />
           <Movie movie_banner={witcher} type="large_square" link="/movie/id" />

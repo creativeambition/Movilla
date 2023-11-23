@@ -32,7 +32,7 @@ const Featured = () => {
             <GoShare className="action_icon visit" title="Visit" />
             <BiShareAlt className="action_icon share" title="Share" />
             <FiBookmark className="action_icon favorite" title="Bookmark" />
-            <FiStar className="action_icon star" title="Bookmark" />
+            <FiStar className="action_icon star" title="Favorite" />
           </div>
         </div>
 

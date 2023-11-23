@@ -1,18 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import Home from "./RoutePages/Home/Home";
-import Movies from "./RoutePages/Movies/Movies";
-import Fav from "./RoutePages/Favorites/Fav";
-import Lib from "./RoutePages/Library/Lib";
-import SingleMovie from "./RoutePages/SingleMovie/SingleMovie";
-import TVShows from "./RoutePages/TVShows/TVShows";
-import Error from "./RoutePages/ErrorPage/Error";
+import Home from "./Pages/Home/Home";
+import Movies from "./Pages/Movies/Movies";
+import Favorites from "./Pages/Favorites/Favorites";
+import Library from "./Pages/Library/Library";
+import SingleMovie from "./Pages/SingleMovie/SingleMovie";
+import TVShows from "./Pages/TVShows/TVShows";
+import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-    errorElement: <Error />,
+    errorElement: <ErrorPage />,
 
     children: [
       {
@@ -29,11 +29,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "favorites",
-        element: <Fav />,
+        element: <Favorites />,
       },
       {
         path: "lib",
-        element: <Lib />,
+        element: <Library />,
       },
       {
         path: "movie/:id",

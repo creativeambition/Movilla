@@ -1,9 +1,9 @@
-import "./Lib.scss";
+import "./Library.scss";
 import { BiLibrary } from "react-icons/bi";
 
-const Lib = () => {
+const Library = () => {
   return (
-    <div className="page lib">
+    <div className="page library">
       <div className="placeholder">
         <BiLibrary className="placeholder_illustration" />
         <span className="placeholder_txt">Library is empty</span>
@@ -12,4 +12,4 @@ const Lib = () => {
   );
 };
 
-export default Lib;
+export default Library;

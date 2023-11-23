@@ -72,7 +72,6 @@
     flex-direction: column;
     align-items: flex-start;
     overflow: auto;
-    overflow-x: hidden;
 
     .blinds {
       position: fixed;
@@ -94,7 +93,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      align-items: center;
+      align-items: flex-start;
 
       .placeholder {
         display: flex;
@@ -108,7 +107,7 @@
 
         .placeholder_txt {
           text-align: center;
-          margin: 20px 10px;
+          margin: 24px 12px;
         }
       }
     }

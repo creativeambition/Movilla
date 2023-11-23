@@ -17,6 +17,8 @@ import animated from "../../assets/animated.png";
 import comedy from "../../assets/comedy.png";
 import scifi from "../../assets/sci-fi.png";
 import war from "../../assets/war.png";
+import fantasy from "../../assets/fantasy.png";
+import crime from "../../assets/crime.png";
 
 const Home = () => {
   return (
@@ -93,17 +95,17 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="large_square" link="movie/id" />
-          <Movie movie_banner={spider} type="large_square" link="movie/id" />
-          <Movie movie_banner={witcher} type="large_square" link="movie/id" />
-          <Movie movie_banner={spiderman} type="large_square" link="movie/id" />
-          <Movie movie_banner={mario} type="large_square" link="movie/id" />
-          <Movie movie_banner={avengers} type="large_square" link="movie/id" />
-          <Movie movie_banner={spider} type="large_square" link="movie/id" />
-          <Movie movie_banner={witcher} type="large_square" link="movie/id" />
-          <Movie movie_banner={spiderman} type="large_square" link="movie/id" />
-          <Movie movie_banner={mario} type="large_square" link="movie/id" />
-          <Movie movie_banner={dune} type="large_square" link="movie/id" />
+          <Movie movie_banner={avengers} type="long" link="movie/id" />
+          <Movie movie_banner={spider} type="long" link="movie/id" />
+          <Movie movie_banner={witcher} type="long" link="movie/id" />
+          <Movie movie_banner={spiderman} type="long" link="movie/id" />
+          <Movie movie_banner={mario} type="long" link="movie/id" />
+          <Movie movie_banner={avengers} type="long" link="movie/id" />
+          <Movie movie_banner={spider} type="long" link="movie/id" />
+          <Movie movie_banner={witcher} type="long" link="movie/id" />
+          <Movie movie_banner={spiderman} type="long" link="movie/id" />
+          <Movie movie_banner={mario} type="long" link="movie/id" />
+          <Movie movie_banner={dune} type="long" link="movie/id" />
         </div>
       </section>
 
@@ -145,21 +147,21 @@ const Home = () => {
 
         <div className="movies_wrapper">
           <Genre banner={action} category="Action" />
-          <Genre banner={adventure} category="Adventure" />
           <Genre banner={animated} category="Animation" />
+          <Genre banner={adventure} category="Adventure" />
           <Genre banner={comedy} category="Comedy" />
-          <Genre banner={dune} category="Crime" />
-          <Genre banner={dune} category="Documentary" />
+          <Genre banner={scifi} category="Science Fiction" />
+          <Genre banner={war} category="War" />
+          <Genre banner={fantasy} category="Fantasy" />
+          <Genre banner={crime} category="Crime" />
           <Genre banner={dune} category="Drama" />
           <Genre banner={dune} category="Family" />
-          <Genre banner={dune} category="Fantasy" />
           <Genre banner={dune} category="Horror" />
           <Genre banner={dune} category="Music" />
           <Genre banner={dune} category="Mystery" />
-          <Genre banner={scifi} category="Science Fiction" />
           <Genre banner={dune} category="TV Movie" />
           <Genre banner={dune} category="Thriller" />
-          <Genre banner={war} category="War" />
+          <Genre banner={dune} category="Documentary" />
         </div>
       </section>
 

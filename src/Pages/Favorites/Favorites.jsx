@@ -1,7 +1,7 @@
-import "./Fav.scss";
+import "./Favorites.scss";
 import { FiStar } from "react-icons/fi";
 
-const Fav = () => {
+const Favorites = () => {
   return (
     <div className="page fav_page">
       <div className="placeholder">
@@ -15,4 +15,4 @@ const Fav = () => {
   );
 };
 
-export default Fav;
+export default Favorites;
