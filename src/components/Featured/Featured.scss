@@ -38,21 +38,20 @@
     align-items: flex-start;
 
     .movie_title {
-      font-size: 60px;
-      line-height: 3.4rem;
+      font-size: 3.8rem;
+      line-height: 3.6rem;
       font-family: "roboto condensed", roboto;
       color: var(--txt-clr-pri);
       transform: translate(-2px);
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 5;
+      -webkit-line-clamp: 3;
       overflow: hidden;
     }
 
     .movie_overview {
-      font-size: 16px;
       line-height: 20px;
-      margin-top: 5px;
+      margin-top: 10px;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 3;
@@ -63,6 +62,7 @@
       display: flex;
       align-items: center;
       gap: 15px;
+      margin-top: 20px;
 
       .movie_info {
         margin: 15px 0;

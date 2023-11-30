@@ -37,7 +37,7 @@ const Navigation = () => {
         <Nav Icon={BiMovie} title="Movies" link="movies" index={1} />
         <Nav Icon={FiTv} title="TV Shows" link="tv-shows" index={2} />
         <Nav Icon={FiStar} title="Favorites" link="favorites" index={3} />
-        <Nav Icon={BiLibrary} title="Library" link="lib" index={4} />
+        <Nav Icon={BiLibrary} title="Library" link="library" index={4} />
       </div>
 
       <div className="theme_toggle">

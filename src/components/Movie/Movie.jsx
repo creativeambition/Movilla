@@ -1,5 +1,5 @@
 import "./Movie.scss";
-import { BiStar } from "react-icons/bi";
+import { BiBookmark, BiStar } from "react-icons/bi";
 import MovieInfo from "./MovieInfo/MovieInfo";
 import { Link } from "react-router-dom";
 

@@ -7,6 +7,7 @@ import Library from "./Pages/Library/Library";
 import SingleMovie from "./Pages/SingleMovie/SingleMovie";
 import TVShows from "./Pages/TVShows/TVShows";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
+import WatchPage from "./Pages/WatchPage/WatchPage";
 
 export const router = createBrowserRouter([
   {
@@ -32,12 +33,16 @@ export const router = createBrowserRouter([
         element: <Favorites />,
       },
       {
-        path: "lib",
+        path: "library",
         element: <Library />,
       },
       {
         path: "movie/:id",
         element: <SingleMovie />,
+      },
+      {
+        path: "watch/:id",
+        element: <WatchPage />,
       },
     ],
   },

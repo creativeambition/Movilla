@@ -7,6 +7,7 @@ import { SharedContext } from "./SharedContext";
 import { Outlet } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Profile from "./components/Profile/Profile";
+import ResetScrollPosition from "./components/ResetScrollPosition/ResetScrollPosition";
 const MobileNavigation = lazy(() =>
   import("./components/MobileNavigation/MobileNavigation")
 );
@@ -17,6 +18,7 @@ function App() {
   const [NavActive, setNavActive] = useState(false);
   const [ThemeOptions, setThemeOptions] = useState(false);
   const [ShowProfile, setShowProfile] = useState(false);
+  const [watchMode, setWathMode] = useState(false);
 
   useEffect(() => {
     const themes = document.querySelectorAll(".theme_colors .theme");
@@ -88,7 +90,9 @@ function App() {
           <Header />
           <Profile />
 
-          <Outlet />
+          <ResetScrollPosition>
+            <Outlet />
+          </ResetScrollPosition>
         </main>
       </SharedContext.Provider>
     </div>
