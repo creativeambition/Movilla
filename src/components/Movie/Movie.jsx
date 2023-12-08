@@ -1,5 +1,5 @@
 import "./Movie.scss";
-import { BiBookmark, BiStar } from "react-icons/bi";
+import { BiStar } from "react-icons/bi";
 import MovieInfo from "./MovieInfo/MovieInfo";
 import { Link } from "react-router-dom";
 
@@ -15,8 +15,8 @@ const Movie = ({ movie_banner, type, link }) => {
       </div>
 
       <div className="details">
-        <span className="title">TITLE</span>
-        {type == "fill_width" && (
+        <span className="title">SPIDERMAN: ACCROSS THE SPIDER-VERSE</span>
+        {type == "wide" && (
           <p className="desc">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae
             deleniti provident ad? Inventore blanditiis consequuntur laudantium

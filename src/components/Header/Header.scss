@@ -2,21 +2,26 @@
   position: fixed;
   top: 0;
   height: 50px;
-  left: var(--pc-left-pos);
+  left: var(--pc-offset-left);
   right: 0;
   z-index: 3;
   display: flex;
   align-items: center;
   padding: 0 20px;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.5s ease;
 
   &.nav_active h2 {
     transform: translate(-10px);
   }
 
   &.colorize {
-    background-color: var(--bg-light);
-    border-bottom: 1px solid var(--clr-alt);
+    background-color: var(--bg-dark);
+    border-bottom: 1px solid var(--universal-color);
+
+    .breadcrumbs {
+      opacity: 1;
+      pointer-events: all;
+    }
   }
 
   .field {
@@ -30,8 +35,7 @@
     flex: 0.6;
 
     img {
-      height: 25px;
-      filter: hue-rotate(240deg);
+      height: 28px;
     }
 
     .menu_icon {
@@ -39,24 +43,37 @@
       height: 40px;
       padding: 8px;
       border-radius: 50%;
-      fill: var(--txt-clr-pri);
+      fill: var(--text-color);
       border: 1px solid transparent;
       transition: 0.2s ease;
 
       &:hover {
-        background-color: var(--clr-alt);
-        border: 1px solid var(--clr-alt);
+        background-color: var(--universal-color);
+        border: 1px solid var(--universal-color);
       }
     }
 
     h2 {
       font-family: playball;
       font-size: 1.6rem;
-      background: linear-gradient(var(--clr-pri), var(--clr-sec));
+      background: linear-gradient(var(--accent-color), var(--accent-color-alt));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       transition: 0.3s ease-out;
+    }
+  }
+
+  .breadcrumbs {
+    position: absolute;
+    left: 150px;
+    display: flex;
+    border: 1px dashed lime;
+    opacity: 0;
+    pointer-events: none;
+
+    a {
+      color: var(--text-color-alt) !important;
     }
   }
 
@@ -67,9 +84,9 @@
     align-items: center;
 
     input {
-      color: var(--txt-clr-pri);
-      background-color: var(--bg-light);
-      border: 1px solid var(--clr-alt);
+      color: var(--text-color);
+      background-color: var(--bg-dark);
+      border: 1px solid var(--universal-color);
       outline: 1px solid transparent;
       height: 35px;
       width: 35px;
@@ -82,9 +99,9 @@
       }
 
       &:focus {
-        border-color: var(--bg-light);
-        outline-color: var(--clr-pri);
-        box-shadow: 0 0 30px -8px var(--clr-pri);
+        border-color: var(--bg-dark);
+        outline-color: var(--accent-color);
+        box-shadow: 0 0 30px -8px var(--accent-color);
       }
     }
 
@@ -101,18 +118,18 @@
       .search_icon {
         transform: translate(0);
         right: 0;
-        box-shadow: -3px 0 15px var(--bg-dark);
+        box-shadow: -3px 0 15px var(--bg-darker);
       }
     }
 
     .search_icon {
       position: absolute;
-      height: 100%;
-      width: 35px;
+      height: 99%;
+      aspect-ratio: 1;
       border-radius: 100px;
       right: 50%;
       transform: translate(50%);
-      background-color: var(--clr-alt);
+      background-color: var(--universal-color);
       border: none;
       display: flex;
       justify-content: center;
@@ -126,7 +143,7 @@
       }
 
       .icon {
-        color: var(--txt-clr-pri);
+        color: var(--text-color);
         pointer-events: none;
         font-size: 20px;
       }
@@ -140,8 +157,8 @@
     transform: translate(-50%, -50px);
     width: 50%;
     min-height: 100px;
-    background-color: var(--bg-dark);
-    border: 1px solid var(--clr-alt);
+    background-color: var(--bg-darker);
+    border: 1px solid var(--universal-color);
     border-radius: 10px;
     box-shadow: 0 10px 10px -8px #00000070;
     display: flex;
@@ -175,7 +192,7 @@
 
     .res_movies_wrapper {
       width: 100%;
-      border-top: 1px solid var(--clr-alt);
+      border-top: 1px solid var(--universal-color);
       display: flex;
       flex-direction: column;
       margin-top: 5px;
@@ -194,9 +211,9 @@
       height: 35px;
       aspect-ratio: 1;
       border-radius: 50%;
-      background-color: var(--bg-light);
+      background-color: var(--bg-dark);
       object-fit: cover;
-      border: 2px solid var(--clr-alt);
+      border: 2px solid var(--universal-color);
       cursor: pointer;
       transition: 0.2s ease;
 
@@ -221,7 +238,7 @@
 
 @media (max-width: 600px) {
   .app_header {
-    left: var(--mobile-left-pos);
+    left: var(--mobile-offset-left);
     padding: 0 10px;
 
     .logo {

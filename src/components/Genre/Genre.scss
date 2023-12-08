@@ -2,8 +2,8 @@
   min-width: 180px;
   aspect-ratio: 2/1;
   overflow: hidden;
-  background-color: var(--bg-dark);
-  border: 1px solid var(--clr-alt);
+  background-color: var(--bg-darker);
+  border: 1px solid var(--universal-color);
   border-radius: 10px;
   position: relative;
   display: flex;
@@ -14,7 +14,7 @@
 
   span {
     position: absolute;
-    color: var(--txt-clr-pri);
+    color: var(--text-color);
     z-index: 1;
   }
 
@@ -23,7 +23,7 @@
     content: "";
     height: 100%;
     width: 100%;
-    background-color: var(--bg-dark);
+    background-color: var(--bg-darker);
     opacity: 0.6;
     transition: 0.3s ease;
   }

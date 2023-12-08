@@ -8,17 +8,20 @@ import { Outlet } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Profile from "./components/Profile/Profile";
 import ResetScrollPosition from "./components/ResetScrollPosition/ResetScrollPosition";
+const MobileProfile = lazy(() =>
+  import("./components/MobileProfile/MobileProfile")
+);
+
 const MobileNavigation = lazy(() =>
   import("./components/MobileNavigation/MobileNavigation")
 );
 
 function App() {
-  const [theme, settheme] = useState("default");
+  const [theme, settheme] = useState("dark");
   const [mobileView, setmobileView] = useState(false);
   const [NavActive, setNavActive] = useState(false);
   const [ThemeOptions, setThemeOptions] = useState(false);
   const [ShowProfile, setShowProfile] = useState(false);
-  const [watchMode, setWathMode] = useState(false);
 
   useEffect(() => {
     const themes = document.querySelectorAll(".theme_colors .theme");
@@ -62,7 +65,7 @@ function App() {
   return (
     <div
       className={`app ${theme}_theme ${
-        (NavActive || ShowProfile) && "drop_blinds"
+        NavActive || ShowProfile ? "drop_blinds" : null
       }`}
     >
       <SharedContext.Provider
@@ -79,6 +82,7 @@ function App() {
         {mobileView ? (
           <Suspense fallback="">
             <MobileNavigation />
+            <MobileProfile />
           </Suspense>
         ) : (
           <Navigation />

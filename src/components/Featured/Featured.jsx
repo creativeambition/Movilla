@@ -1,19 +1,19 @@
 import "./Featured.scss";
-import banner from "../../assets/movies/spiderman.jpg";
+import banner from "../../assets/movies/raya.jpg";
 
 import { FiBookmark, FiStar } from "react-icons/fi";
 import MovieInfo from "../Movie/MovieInfo/MovieInfo";
 import { GoShare } from "react-icons/go";
 import { BiShareAlt } from "react-icons/bi";
-import ActionButtons from "../ActionButtons/ActionButtons";
+import CTAButtons from "../CTAButtons/CTAButtons";
 
 const Featured = () => {
   return (
-    <section className="featured_section">
+    <div className="featured_section">
       <img src={banner} alt="" className="featured_banner" />
 
       <div className="details">
-        <h2 className="movie_title">SPIDER-MAN: ACCROSS THE SPIDER-VERSE</h2>
+        <h2 className="movie_title">RAYA AND THE LAST DRAGON</h2>
 
         <span className="movie_overview">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit maiores
@@ -36,9 +36,9 @@ const Featured = () => {
           </div>
         </div>
 
-        <ActionButtons />
+        <CTAButtons />
       </div>
-    </section>
+    </div>
   );
 };
 

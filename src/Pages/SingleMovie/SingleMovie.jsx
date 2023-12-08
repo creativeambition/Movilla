@@ -1,21 +1,24 @@
 import "./SingleMovie.scss";
 import avengers from "../../assets/movies/avengers.png";
 import dune from "../../assets/movies/dune.png";
-import MovieDetails from "../../components/Movie/MovieDetails/MovieDetails";
 import Movie from "../../components/Movie/Movie";
 import Cast from "../../components/CastProfile/Cast";
 
-import avatar1 from "../../assets/casts/3.jpg";
-import avatar2 from "../../assets/casts/1.jpg";
-import avatar3 from "../../assets/casts/11.jpg";
+import avatar1 from "../../assets/cast/3.jpg";
+import avatar2 from "../../assets/cast/1.jpg";
+import avatar3 from "../../assets/cast/11.jpg";
 import { BiShareAlt, BiStar } from "react-icons/bi";
 import { GoShare } from "react-icons/go";
 import { FiBookmark } from "react-icons/fi";
 import { FaChevronLeft } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import MovieInfo from "../../components/Movie/MovieInfo/MovieInfo";
+import CTAButtons from "../../components/CTAButtons/CTAButtons";
 
 const SingleMovie = () => {
   const navigate = useNavigate();
+  const [expandOverview, setexpandOverview] = useState(false);
 
   return (
     <div className="single_movie_page">
@@ -54,7 +57,35 @@ const SingleMovie = () => {
       </div>
 
       <div className="details_section">
-        <MovieDetails />
+        <div className="overview_section">
+          <p className="section_title">Overview</p>
+
+          <span className={`movie_overview ${expandOverview && "expand"}`}>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
+            nobis quam ipsum ratione accusantium rerum, voluptates corrupti
+            nesciunt quasi doloremque pariatur corporis quidem amet sapiente
+            quibusdam praesentium sequi libero molestiae, officiis totam!
+            Laborum nobis expedita rem ratione, earum, corporis sunt adipisci
+            fugiat, repellat nam ut libero qui quam magni cum magnam
+            consequuntur non architecto eius doloribus ex unde sit dolor? Minus
+            cum, aspernatur aperiam eligendi harum libero maiores aliquid.
+            Labore consequuntur veniam reiciendis, molestiae dolorem itaque
+            consectetur nisi nihil rerum dicta nostrum in, iure sit quis numquam
+            voluptas voluptatibus explicabo! Cupiditate sapiente ea minus
+            corrupti non quis laboriosam commodi repellendus.
+            <div
+              className="show_more"
+              onClick={() => {
+                setexpandOverview((prev) => !prev);
+              }}
+            >
+              {expandOverview ? "Show Less" : "Show More"}
+            </div>
+          </span>
+
+          <MovieInfo />
+          <CTAButtons />
+        </div>
 
         <div className="cast_section">
           <p className="section_title">Cast</p>
@@ -87,7 +118,7 @@ const SingleMovie = () => {
         </div>
 
         <div className="more_info">
-          <section className="similar_movies">
+          <div className="similar_movies">
             <p className="section_title">Similar</p>
 
             <div className="wrapper">
@@ -99,12 +130,12 @@ const SingleMovie = () => {
               <Movie movie_banner={dune} type="small" link="/movie/id" />
               <Movie movie_banner={dune} type="small" link="/movie/id" />
             </div>
-          </section>
+          </div>
 
           <div className="meta_data">
-            <p className="section_title">More info | Meta Data</p>
+            <p className="section_title">About</p>
 
-            <section>
+            <div className="content">
               <div className="x">
                 <div className="key">Year</div>
                 <div className="val">2023</div>
@@ -149,7 +180,7 @@ const SingleMovie = () => {
                 <div className="key">Year</div>
                 <div className="val">2023</div>
               </div>
-            </section>
+            </div>
           </div>
         </div>
       </div>

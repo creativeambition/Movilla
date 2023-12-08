@@ -1,6 +1,6 @@
 import "./Header.scss";
-import logo from "../../assets/logo.png";
-import profile_src from "../../assets/profile.jpg";
+import logo from "../../assets/others/logo.png";
+import profile_src from "../../assets/others/profile.jpg";
 import { Suspense, lazy, useContext, useEffect, useState } from "react";
 import { SharedContext } from "../../SharedContext";
 
@@ -9,6 +9,7 @@ import { BiChevronLeft, BiSearchAlt } from "react-icons/bi";
 
 import spiderman_banner from "../../assets/movies/spider.jpg";
 import { Link } from "react-router-dom";
+import { Breadcrumbs, Typography } from "@mui/material";
 const ResMovie = lazy(() => import("../SearchResMovie/ResMovie"));
 
 const Header = () => {
@@ -49,7 +50,7 @@ const Header = () => {
   }
 
   return (
-    <header className={`app_header`}>
+    <header className="app_header">
       <div className="logo field">
         {mobileView ? (
           <RiMenu4Fill
@@ -65,6 +66,24 @@ const Header = () => {
         <Link to="/">
           <h2>Movilla</h2>
         </Link>
+
+        {/* {!mobileView && (
+          <div className="breadcrumbs">
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link underline="hover" color="inherit" href="/">
+                Home
+              </Link>
+              <Link
+                underline="hover"
+                color="inherit"
+                href="/material-ui/getting-started/installation/"
+              >
+                Movies
+              </Link>
+              <Typography color="text.primary">Breadcrumbs</Typography>
+            </Breadcrumbs>
+          </div>
+        )} */}
       </div>
 
       <>

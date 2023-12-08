@@ -51,24 +51,20 @@ const Navigation = () => {
             data-theme="dark"
             style={{ "--custom-clr": "#101010" }}
             title="Dark Theme"
-          ></div>
+          />
+
           <div
             className="theme"
-            data-theme="cyan"
-            style={{ "--custom-clr": "#0B1E2C" }}
-            title="Cyan Theme"
+            data-theme="moonlight"
+            style={{ "--custom-clr": "#0d1232" }}
+            title="Moonlight"
           ></div>
+
           <div
             className="theme"
             data-theme="purple"
             style={{ "--custom-clr": "#1B182E" }}
             title="Purple Theme"
-          ></div>
-          <div
-            className="theme"
-            data-theme="light"
-            style={{ "--custom-clr": "#bdcce4" }}
-            title="Light Theme"
           ></div>
         </div>
       </div>

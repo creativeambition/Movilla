@@ -19,14 +19,19 @@ const MobileNavigation = () => {
         <MobileNavIcon Icon={RiHome5Line} title="Home" link="/" index={0} />
         <MobileNavIcon Icon={BiMovie} title="Movies" link="movies" index={1} />
         <MobileNavIcon Icon={FiTv} title="TV Shows" link="tv-shows" index={2} />
-        <MobileNavIcon Icon={BiLibrary} title="Library" link="lib" index={3} />
+        <MobileNavIcon
+          Icon={BiLibrary}
+          title="Library"
+          link="library"
+          index={3}
+        />
       </div>
 
       <div className="theme_options">
-        <span>
-          <MdOutlineFormatPaint className="icon" />
+        <div className="header">
           Change Theme
-        </span>
+          <MdOutlineFormatPaint className="icon" />
+        </div>
 
         <div className="theme_colors">
           <div
@@ -37,21 +42,15 @@ const MobileNavigation = () => {
           ></div>
           <div
             className="theme"
-            data-theme="cyan"
-            style={{ "--custom-clr": "#0B1E2C" }}
-            title="Cyan Theme"
+            data-theme="moonlight"
+            style={{ "--custom-clr": "#0d1232" }}
+            title="Moonlight"
           ></div>
           <div
             className="theme"
             data-theme="purple"
             style={{ "--custom-clr": "#1B182E" }}
             title="Purple Theme"
-          ></div>
-          <div
-            className="theme"
-            data-theme="light"
-            style={{ "--custom-clr": "#cacaca" }}
-            title="Light Theme"
           ></div>
         </div>
       </div>

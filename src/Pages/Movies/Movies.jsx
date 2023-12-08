@@ -5,62 +5,52 @@ import spiderman from "../../assets/movies/spiderman.jpg";
 import witcher from "../../assets/movies/witcher.png";
 import mario from "../../assets/movies/mario.png";
 import dune from "../../assets/movies/dune.png";
+import { BiMovie } from "react-icons/bi";
 
 const Movies = () => {
   return (
     <div className="page movies_page">
-      <section className="section">
+      <div className="page_header">
+        <BiMovie />
+        Movies
+      </div>
+
+      <section>
         <header>
-          <span className="section_title">Popular</span>
+          {/* <span className="section_title">Trending Movies</span> */}
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={spider} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={mario} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={witcher} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={avengers} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={spider} type="wide" link="/movie/id" />
+          <Movie movie_banner={mario} type="wide" link="/movie/id" />
+          <Movie movie_banner={witcher} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={avengers} type="wide" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Top Rated</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie
-            movie_banner={spiderman}
-            type="large_square"
-            link="/movie/id"
-          />
-          <Movie movie_banner={avengers} type="large_square" link="/movie/id" />
-          <Movie movie_banner={spider} type="large_square" link="/movie/id" />
-          <Movie
-            movie_banner={spiderman}
-            type="large_square"
-            link="/movie/id"
-          />
-          <Movie movie_banner={witcher} type="large_square" link="/movie/id" />
-          <Movie movie_banner={mario} type="large_square" link="/movie/id" />
-          <Movie
-            movie_banner={spiderman}
-            type="large_square"
-            link="/movie/id"
-          />
-          <Movie movie_banner={avengers} type="large_square" link="/movie/id" />
-          <Movie movie_banner={spider} type="large_square" link="/movie/id" />
-          <Movie
-            movie_banner={spiderman}
-            type="large_square"
-            link="/movie/id"
-          />
-          <Movie movie_banner={witcher} type="large_square" link="/movie/id" />
-          <Movie movie_banner={mario} type="large_square" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="medium" link="/movie/id" />
+          <Movie movie_banner={avengers} type="medium" link="/movie/id" />
+          <Movie movie_banner={spider} type="medium" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="medium" link="/movie/id" />
+          <Movie movie_banner={witcher} type="medium" link="/movie/id" />
+          <Movie movie_banner={mario} type="medium" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="medium" link="/movie/id" />
+          <Movie movie_banner={avengers} type="medium" link="/movie/id" />
+          <Movie movie_banner={spider} type="medium" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="medium" link="/movie/id" />
+          <Movie movie_banner={witcher} type="medium" link="/movie/id" />
+          <Movie movie_banner={mario} type="medium" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Action</span>
         </header>
@@ -80,7 +70,7 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Adventure</span>
         </header>
@@ -100,27 +90,27 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Animation</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="small" link="/movie/id" />
-          <Movie movie_banner={spider} type="small" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="small" link="/movie/id" />
-          <Movie movie_banner={witcher} type="small" link="/movie/id" />
-          <Movie movie_banner={mario} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={avengers} type="small" link="/movie/id" />
-          <Movie movie_banner={spider} type="small" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="small" link="/movie/id" />
-          <Movie movie_banner={witcher} type="small" link="/movie/id" />
-          <Movie movie_banner={mario} type="small" link="/movie/id" />
+          <Movie movie_banner={avengers} type="long" link="/movie/id" />
+          <Movie movie_banner={spider} type="long" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="long" link="/movie/id" />
+          <Movie movie_banner={witcher} type="long" link="/movie/id" />
+          <Movie movie_banner={mario} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={avengers} type="long" link="/movie/id" />
+          <Movie movie_banner={spider} type="long" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="long" link="/movie/id" />
+          <Movie movie_banner={witcher} type="long" link="/movie/id" />
+          <Movie movie_banner={mario} type="long" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Comedy</span>
         </header>
@@ -140,67 +130,67 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Crime</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Documentary</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Horror</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Family</span>
         </header>
@@ -220,27 +210,27 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Fantasy</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
-          <Movie movie_banner={dune} type="small" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
+          <Movie movie_banner={dune} type="long" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Music</span>
         </header>
@@ -260,7 +250,7 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Mystery</span>
         </header>
@@ -280,7 +270,7 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Science Fiction</span>
         </header>
@@ -300,22 +290,22 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">TV Movie</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={dune} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Drama</span>
         </header>
@@ -335,7 +325,7 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">War</span>
         </header>
@@ -355,7 +345,7 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Thriller</span>
         </header>
@@ -375,48 +365,40 @@ const Movies = () => {
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">New Releases</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={spider} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={witcher} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={mario} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={spider} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={witcher} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="fill_width" link="/movie/id" />
-          <Movie movie_banner={avengers} type="fill_width" link="/movie/id" />
+          <Movie movie_banner={mario} type="wide" link="/movie/id" />
+          <Movie movie_banner={spider} type="wide" link="/movie/id" />
+          <Movie movie_banner={witcher} type="wide" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="wide" link="/movie/id" />
+          <Movie movie_banner={mario} type="wide" link="/movie/id" />
+          <Movie movie_banner={spider} type="wide" link="/movie/id" />
+          <Movie movie_banner={witcher} type="wide" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="wide" link="/movie/id" />
+          <Movie movie_banner={avengers} type="wide" link="/movie/id" />
         </div>
       </section>
 
-      <section className="section">
+      <section>
         <header>
           <span className="section_title">Upcoming</span>
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="large_square" link="/movie/id" />
-          <Movie movie_banner={spider} type="large_square" link="/movie/id" />
-          <Movie movie_banner={witcher} type="large_square" link="/movie/id" />
-          <Movie
-            movie_banner={spiderman}
-            type="large_square"
-            link="/movie/id"
-          />
-          <Movie movie_banner={avengers} type="large_square" link="/movie/id" />
-          <Movie movie_banner={mario} type="large_square" link="/movie/id" />
-          <Movie movie_banner={spider} type="large_square" link="/movie/id" />
-          <Movie movie_banner={witcher} type="large_square" link="/movie/id" />
-          <Movie
-            movie_banner={spiderman}
-            type="large_square"
-            link="/movie/id"
-          />
-          <Movie movie_banner={avengers} type="large_square" link="/movie/id" />
+          <Movie movie_banner={mario} type="medium" link="/movie/id" />
+          <Movie movie_banner={spider} type="medium" link="/movie/id" />
+          <Movie movie_banner={witcher} type="medium" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="medium" link="/movie/id" />
+          <Movie movie_banner={avengers} type="medium" link="/movie/id" />
+          <Movie movie_banner={mario} type="medium" link="/movie/id" />
+          <Movie movie_banner={spider} type="medium" link="/movie/id" />
+          <Movie movie_banner={witcher} type="medium" link="/movie/id" />
+          <Movie movie_banner={spiderman} type="medium" link="/movie/id" />
+          <Movie movie_banner={avengers} type="medium" link="/movie/id" />
         </div>
       </section>
     </div>

@@ -11,15 +11,15 @@
   transition: 0.3s ease;
 
   &:hover {
-    background-color: var(--bg-light);
-    border: 1px solid var(--clr-alt);
+    background-color: var(--bg-dark);
+    border: 1px solid var(--universal-color);
   }
 
   .banner {
     width: 35px;
     aspect-ratio: 1;
     object-fit: cover;
-    border: 1px solid var(--clr-alt);
+    border: 1px solid var(--universal-color);
     border-radius: 10px;
   }
 
@@ -34,7 +34,7 @@
       line-height: 20px;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: var(--txt-clr-pri);
+      color: var(--text-color);
     }
 
     .info {
@@ -44,7 +44,7 @@
       span {
         font-size: 12px;
         opacity: 0.7;
-        color: var(--txt-clr-sec);
+        color: var(--text-color-alt);
       }
     }
   }

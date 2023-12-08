@@ -7,13 +7,14 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 30px;
 
   &::before {
     position: absolute;
     content: "";
     height: 100%;
     width: 100%;
-    background: linear-gradient(transparent, var(--bg-light));
+    background: linear-gradient(transparent, var(--bg-dark));
     bottom: -1px;
     z-index: 1;
   }
@@ -28,7 +29,7 @@
   }
 
   .details {
-    width: min(90%, 700px);
+    width: min(100%, 1000px);
     position: relative;
     z-index: 1;
     align-self: flex-end;
@@ -38,10 +39,10 @@
     align-items: flex-start;
 
     .movie_title {
-      font-size: 3.8rem;
-      line-height: 3.6rem;
+      font-size: 64px;
+      line-height: 64px;
       font-family: "roboto condensed", roboto;
-      color: var(--txt-clr-pri);
+      color: var(--text-color);
       transform: translate(-2px);
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -60,16 +61,18 @@
 
     .info_wrapper {
       display: flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 15px;
-      margin-top: 20px;
+      gap: 16px;
+      margin-top: 12px;
+      margin-bottom: 24px;
 
       .movie_info {
         margin: 15px 0;
         border-radius: 10px;
         padding: 12px 15px;
-        background-color: var(--bg-dark);
-        border: 1px solid var(--clr-alt);
+        background-color: var(--bg-darker);
+        border: 1px solid var(--universal-color);
       }
 
       .quick_tools {
@@ -78,21 +81,17 @@
         align-items: center;
         gap: 12px;
       }
-
-      .action_icon {
-        font-size: 35px;
-      }
     }
   }
 }
 
 @media (max-width: 900px) {
   .featured_section .details {
-    padding: 20px 20px 40px;
+    padding: 30px;
 
     .movie_title {
-      font-size: 3rem;
-      line-height: 3rem;
+      font-size: 48px;
+      line-height: 48px;
     }
   }
 }
@@ -100,11 +99,17 @@
 @media (max-width: 600px) {
   .featured_section {
     .details {
-      padding: 0 20px 30px;
+      padding: 0 15px 30px;
 
       .movie_title {
-        font-size: 45px;
+        font-size: 40px;
         line-height: 40px;
+      }
+
+      .info_wrapper {
+        .quick_tools {
+          display: none;
+        }
       }
     }
   }

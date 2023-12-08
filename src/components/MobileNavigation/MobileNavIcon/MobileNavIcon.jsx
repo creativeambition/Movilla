@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { SharedContext } from "../../../SharedContext";
 
-const MobileNavIcon = ({ Icon, title, active, link, index }) => {
+const MobileNavIcon = ({ Icon, title, link, index }) => {
   const { setNavActive } = useContext(SharedContext);
 
   useEffect(() => {
@@ -56,11 +56,7 @@ const MobileNavIcon = ({ Icon, title, active, link, index }) => {
   }
 
   return (
-    <Link
-      to={link}
-      className={`mobile_nav_icon ${active && "active"}`}
-      onClick={handleIndicator}
-    >
+    <Link to={link} className="mobile_nav_icon" onClick={handleIndicator}>
       <Icon className="icon" />
       <span>{title}</span>
     </Link>

@@ -1,4 +1,3 @@
-import "./Library.scss";
 import { BiLibrary } from "react-icons/bi";
 
 const Library = () => {

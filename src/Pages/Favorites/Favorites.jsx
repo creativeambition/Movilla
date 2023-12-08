@@ -1,4 +1,3 @@
-import "./Favorites.scss";
 import { FiStar } from "react-icons/fi";
 
 const Favorites = () => {
