@@ -62,7 +62,7 @@ const TVShows = () => {
 
       <section>
         <header>
-          <span className="section_title">Drama</span>
+          <span className="section_title">Animation</span>
         </header>
 
         <div className="movies_wrapper">
@@ -102,7 +102,185 @@ const TVShows = () => {
 
       <section>
         <header>
+          <span className="section_title">Crime</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+        </div>
+      </section>
+
+      <section>
+        <header>
           <span className="section_title">Documentary</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <span className="section_title">Drama</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <span className="section_title">Family</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <span className="section_title">Kids</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <span className="section_title">Mystery</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">News</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">Reality</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">Sci-Fi & Fantasy</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">Soap</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">Talk</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">War & Politics</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+          <Movie movie_banner={dune} type="small" link="/movie/movie_id" />
+        </div>
+      </section>
+      <section>
+        <header>
+          <span className="section_title">Western</span>
         </header>
 
         <div className="movies_wrapper">

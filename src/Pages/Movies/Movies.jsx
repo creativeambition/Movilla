@@ -16,10 +16,6 @@ const Movies = () => {
       </div>
 
       <section>
-        <header>
-          {/* <span className="section_title">Trending Movies</span> */}
-        </header>
-
         <div className="movies_wrapper">
           <Movie movie_banner={spider} type="wide" link="/movie/id" />
           <Movie movie_banner={mario} type="wide" link="/movie/id" />

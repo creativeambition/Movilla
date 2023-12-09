@@ -121,7 +121,7 @@ const Home = () => {
 
       <section>
         <header>
-          <span className="section_title">Popular TV Shows</span>
+          <span className="section_title">Trending Movies</span>
         </header>
 
         <div className="movies_wrapper">
@@ -130,6 +130,7 @@ const Home = () => {
           <Movie movie_banner={witcher} type="long" link="movie/id" />
           <Movie movie_banner={spiderman} type="long" link="movie/id" />
           <Movie movie_banner={mario} type="long" link="movie/id" />
+          <Movie movie_banner={dune} type="long" link="movie/id" />
           <Movie movie_banner={avengers} type="long" link="movie/id" />
           <Movie movie_banner={spider} type="long" link="movie/id" />
           <Movie movie_banner={witcher} type="long" link="movie/id" />
@@ -172,6 +173,26 @@ const Home = () => {
 
       <section>
         <header>
+          <span className="section_title">Popular TV Shows</span>
+        </header>
+
+        <div className="movies_wrapper">
+          <Movie movie_banner={avengers} type="long" link="movie/id" />
+          <Movie movie_banner={spider} type="long" link="movie/id" />
+          <Movie movie_banner={witcher} type="long" link="movie/id" />
+          <Movie movie_banner={spiderman} type="long" link="movie/id" />
+          <Movie movie_banner={mario} type="long" link="movie/id" />
+          <Movie movie_banner={avengers} type="long" link="movie/id" />
+          <Movie movie_banner={spider} type="long" link="movie/id" />
+          <Movie movie_banner={witcher} type="long" link="movie/id" />
+          <Movie movie_banner={spiderman} type="long" link="movie/id" />
+          <Movie movie_banner={mario} type="long" link="movie/id" />
+          <Movie movie_banner={dune} type="long" link="movie/id" />
+        </div>
+      </section>
+
+      <section>
+        <header>
           <span className="section_title">Top Rated Shows</span>
         </header>
 
@@ -209,27 +230,6 @@ const Home = () => {
           <Movie movie_banner={avengers} type="wide" link="movie/id" />
           <Movie movie_banner={spiderman} type="wide" link="movie/id" />
           <Movie movie_banner={witcher} type="wide" link="movie/id" />
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Popular Movies</span>
-        </header>
-
-        <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
         </div>
       </section>
     </>
