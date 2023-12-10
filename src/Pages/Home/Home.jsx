@@ -18,8 +18,67 @@ import scifi from "../../assets/genre/sci-fi.png";
 import war from "../../assets/genre/war.png";
 import fantasy from "../../assets/genre/fantasy.png";
 import crime from "../../assets/genre/crime.png";
+import { useEffect, useState } from "react";
+import {
+  AiringToday,
+  NowPlaying,
+  PopularMovies,
+  PopularShows,
+  TopRatedMovies,
+  TopRatedShows,
+  TrendingMovies,
+  UpcomingMovies,
+} from "../../Data/Data";
 
 const Home = () => {
+  const [popularMovies, setPopularMovies] = useState([]);
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [nowPlaying, setNowPlaying] = useState([]);
+  const [trendingMovies, setTrendingMovies] = useState([]);
+  const [upcomingMovies, setUpcomingMovies] = useState([]);
+
+  const [popularShows, setPopularShows] = useState([]);
+  const [topRatedShows, setTopRatedShows] = useState([]);
+  const [airingToday, setAiringToday] = useState([]);
+
+  useEffect(() => {
+    function fetchData() {
+      PopularMovies().then((data) => {
+        setPopularMovies(data.results);
+      });
+
+      TopRatedMovies().then((data) => {
+        setTopRatedMovies(data.results);
+      });
+
+      NowPlaying().then((data) => {
+        setNowPlaying(data.results);
+      });
+
+      TrendingMovies().then((data) => {
+        setTrendingMovies(data.results);
+      });
+
+      UpcomingMovies().then((data) => {
+        setUpcomingMovies(data.results);
+      });
+
+      PopularShows().then((data) => {
+        setPopularShows(data.results);
+      });
+
+      TopRatedShows().then((data) => {
+        setTopRatedShows(data.results);
+      });
+
+      AiringToday().then((data) => {
+        setAiringToday(data.results);
+      });
+    }
+
+    fetchData();
+  }, []);
+
   return (
     <>
       <Featured />
@@ -30,18 +89,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="medium" link="movie/id" />
-          <Movie movie_banner={spider} type="medium" link="movie/id" />
-          <Movie movie_banner={witcher} type="medium" link="movie/id" />
-          <Movie movie_banner={spiderman} type="medium" link="movie/id" />
-          <Movie movie_banner={mario} type="medium" link="movie/id" />
-          <Movie movie_banner={dune} type="medium" link="movie/id" />
-          <Movie movie_banner={avengers} type="medium" link="movie/id" />
-          <Movie movie_banner={spider} type="medium" link="movie/id" />
-          <Movie movie_banner={witcher} type="medium" link="movie/id" />
-          <Movie movie_banner={spiderman} type="medium" link="movie/id" />
-          <Movie movie_banner={mario} type="medium" link="movie/id" />
-          <Movie movie_banner={dune} type="medium" link="movie/id" />
+          {popularMovies.length > 3 &&
+            popularMovies.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                type="medium"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -63,22 +120,22 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Genre banner={action} category="Action" />
-          <Genre banner={animated} category="Animation" />
-          <Genre banner={adventure} category="Adventure" />
-          <Genre banner={comedy} category="Comedy" />
-          <Genre banner={scifi} category="Science Fiction" />
-          <Genre banner={war} category="War" />
-          <Genre banner={fantasy} category="Fantasy" />
-          <Genre banner={crime} category="Crime" />
-          <Genre banner={dune} category="Drama" />
-          <Genre banner={dune} category="Family" />
-          <Genre banner={dune} category="Horror" />
-          <Genre banner={dune} category="Music" />
-          <Genre banner={dune} category="Mystery" />
-          <Genre banner={dune} category="TV Movie" />
-          <Genre banner={dune} category="Thriller" />
-          <Genre banner={dune} category="Documentary" />
+          <Genre link={"/movies/#action"} banner={action} category="Action" />
+          <Genre link={"/movies"} banner={animated} category="Animation" />
+          <Genre link={"/movies"} banner={adventure} category="Adventure" />
+          <Genre link={"/movies"} banner={comedy} category="Comedy" />
+          <Genre link={"/movies"} banner={scifi} category="Science Fiction" />
+          <Genre link={"/movies"} banner={war} category="War" />
+          <Genre link={"/movies"} banner={fantasy} category="Fantasy" />
+          <Genre link={"/movies"} banner={crime} category="Crime" />
+          <Genre link={"/movies"} banner={dune} category="Drama" />
+          <Genre link={"/movies"} banner={dune} category="Family" />
+          <Genre link={"/movies"} banner={dune} category="Horror" />
+          <Genre link={"/movies"} banner={dune} category="Music" />
+          <Genre link={"/movies"} banner={dune} category="Mystery" />
+          <Genre link={"/movies"} banner={dune} category="TV Movie" />
+          <Genre link={"/movies"} banner={dune} category="Thriller" />
+          <Genre link={"/movies"} banner={dune} category="Documentary" />
         </div>
       </section>
 
@@ -88,17 +145,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
+          {topRatedMovies.length > 3 &&
+            topRatedMovies.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                type="long"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -110,12 +166,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="wide" link="movie/id" />
-          <Movie movie_banner={dune} type="wide" link="movie/id" />
-          <Movie movie_banner={spider} type="wide" link="movie/id" />
-          <Movie movie_banner={avengers} type="wide" link="movie/id" />
-          <Movie movie_banner={spiderman} type="wide" link="movie/id" />
-          <Movie movie_banner={witcher} type="wide" link="movie/id" />
+          {nowPlaying.length > 3 &&
+            nowPlaying.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                type="wide"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -125,18 +185,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
+          {trendingMovies.length > 3 &&
+            trendingMovies.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                type="long"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -146,16 +204,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="medium" link="movie/id" />
-          <Movie movie_banner={dune} type="medium" link="movie/id" />
-          <Movie movie_banner={spider} type="medium" link="movie/id" />
-          <Movie movie_banner={avengers} type="medium" link="movie/id" />
-          <Movie movie_banner={spiderman} type="medium" link="movie/id" />
-          <Movie movie_banner={witcher} type="medium" link="movie/id" />
-          <Movie movie_banner={mario} type="medium" link="movie/id" />
-          <Movie movie_banner={dune} type="medium" link="movie/id" />
-          <Movie movie_banner={spider} type="medium" link="movie/id" />
-          <Movie movie_banner={avengers} type="medium" link="movie/id" />
+          {upcomingMovies.length > 3 &&
+            upcomingMovies.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                type="medium"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -177,17 +235,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={avengers} type="long" link="movie/id" />
-          <Movie movie_banner={spider} type="long" link="movie/id" />
-          <Movie movie_banner={witcher} type="long" link="movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="movie/id" />
-          <Movie movie_banner={mario} type="long" link="movie/id" />
-          <Movie movie_banner={dune} type="long" link="movie/id" />
+          {popularShows.length > 3 &&
+            popularShows.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                type="long"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -197,18 +254,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="small" link="movie/id" />
-          <Movie movie_banner={dune} type="small" link="movie/id" />
-          <Movie movie_banner={spider} type="small" link="movie/id" />
-          <Movie movie_banner={avengers} type="small" link="movie/id" />
-          <Movie movie_banner={spiderman} type="small" link="movie/id" />
-          <Movie movie_banner={witcher} type="small" link="movie/id" />
-          <Movie movie_banner={mario} type="small" link="movie/id" />
-          <Movie movie_banner={dune} type="small" link="movie/id" />
-          <Movie movie_banner={spider} type="small" link="movie/id" />
-          <Movie movie_banner={avengers} type="small" link="movie/id" />
-          <Movie movie_banner={spiderman} type="small" link="movie/id" />
-          <Movie movie_banner={witcher} type="small" link="movie/id" />
+          {topRatedShows.length > 3 &&
+            topRatedShows.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                type="medium"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
 
@@ -218,18 +273,16 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={mario} type="wide" link="movie/id" />
-          <Movie movie_banner={dune} type="wide" link="movie/id" />
-          <Movie movie_banner={spider} type="wide" link="movie/id" />
-          <Movie movie_banner={avengers} type="wide" link="movie/id" />
-          <Movie movie_banner={spiderman} type="wide" link="movie/id" />
-          <Movie movie_banner={witcher} type="wide" link="movie/id" />
-          <Movie movie_banner={mario} type="wide" link="movie/id" />
-          <Movie movie_banner={dune} type="wide" link="movie/id" />
-          <Movie movie_banner={spider} type="wide" link="movie/id" />
-          <Movie movie_banner={avengers} type="wide" link="movie/id" />
-          <Movie movie_banner={spiderman} type="wide" link="movie/id" />
-          <Movie movie_banner={witcher} type="wide" link="movie/id" />
+          {airingToday.length > 3 &&
+            airingToday.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+                type="wide"
+                link={`movie/${movie.id}`}
+                content={movie}
+              />
+            ))}
         </div>
       </section>
     </>

@@ -3,7 +3,7 @@ import { BiStar } from "react-icons/bi";
 import MovieInfo from "./MovieInfo/MovieInfo";
 import { Link } from "react-router-dom";
 
-const Movie = ({ movie_banner, type, link }) => {
+const Movie = ({ movie_banner, type, link, content }) => {
   return (
     <div className={`movie ${type}`}>
       <Link to={link}>
@@ -15,18 +15,16 @@ const Movie = ({ movie_banner, type, link }) => {
       </div>
 
       <div className="details">
-        <span className="title">SPIDERMAN: ACCROSS THE SPIDER-VERSE</span>
-        {type == "wide" && (
-          <p className="desc">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id quae
-            deleniti provident ad? Inventore blanditiis consequuntur laudantium
-            asperiores, officiis quo odit. Saepe exercitationem laudantium iste
-            dolor nulla excepturi atque aperiam quos. Eaque dolores repellat eum
-            numquam corrupti exercitationem aspernatur velit!
-          </p>
-        )}
+        <span className="title">
+          {content?.title ||
+            content?.original_title ||
+            content?.name ||
+            content?.original_name ||
+            "loading..."}
+        </span>
+        {type == "wide" && <p className="desc">{content?.overview}</p>}
 
-        <MovieInfo />
+        <MovieInfo data={content} />
       </div>
     </div>
   );

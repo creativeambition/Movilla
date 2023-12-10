@@ -1,11 +1,11 @@
 import "./Cast.scss";
 
-const Cast = ({ avatar }) => {
+const Cast = ({ profile, name }) => {
   return (
     <div className="cast">
-      <img src={avatar} alt="" />
+      <img src={profile} alt="" />
 
-      <span className="name">Chris Hemsworth</span>
+      <span className="name">{name}</span>
     </div>
   );
 };

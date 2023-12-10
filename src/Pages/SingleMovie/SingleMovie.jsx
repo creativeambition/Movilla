@@ -11,19 +11,44 @@ import { BiShareAlt, BiStar } from "react-icons/bi";
 import { GoShare } from "react-icons/go";
 import { FiBookmark } from "react-icons/fi";
 import { FaChevronLeft } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import MovieInfo from "../../components/Movie/MovieInfo/MovieInfo";
 import CTAButtons from "../../components/CTAButtons/CTAButtons";
+import {
+  MovieCredits,
+  MovieDetails,
+  MovieImages,
+  MovieVideos,
+  SimilarMovies,
+} from "../../Data/Data";
 
 const SingleMovie = () => {
   const navigate = useNavigate();
+
   const [expandOverview, setexpandOverview] = useState(false);
+
+  const { id } = useParams();
+
+  const [movieDetails, setMovieDetails] = useState([]);
+  const [movieImages, setMovieImages] = useState([]);
+  const [similarMovies, setSimilarMovies] = useState([]);
+  const [cast, setCast] = useState([]);
+
+  useEffect(() => {
+    MovieDetails(id).then((data) => setMovieDetails(data));
+    MovieImages(id).then((data) => setMovieImages(data.backdrops));
+    SimilarMovies(id).then((data) => setSimilarMovies(data.results));
+    MovieCredits(id).then((data) => setCast(data.cast));
+  }, [id]);
 
   return (
     <div className="single_movie_page">
       <div className="movie_banner">
-        <img src={avengers} alt="" />
+        <img
+          src={`https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path}`}
+          alt=""
+        />
       </div>
 
       <header>
@@ -34,7 +59,13 @@ const SingleMovie = () => {
           }}
         />
 
-        <h2 className="movie_title">AVENGERS: INFINITY WAR</h2>
+        <h2 className="movie_title">
+          {movieDetails.title ||
+            movieDetails.original_title ||
+            movieDetails.name ||
+            movieDetails.original_name ||
+            "loading..."}
+        </h2>
 
         <div className="tools">
           <BiStar className="action_icon" />
@@ -45,15 +76,17 @@ const SingleMovie = () => {
       </header>
 
       <div className="slide_container">
-        <div className="slide">
-          <img src={avengers} alt="" />
-        </div>
-        <div className="slide">
-          <img src={dune} alt="" />
-        </div>
-        <div className="slide">
-          <img src={avengers} alt="" />
-        </div>
+        {movieImages.length > 0 &&
+          movieImages.map((img) => {
+            return (
+              <div className="slide" key={img.file_path}>
+                <img
+                  src={`https://image.tmdb.org/t/p/original${img.file_path}`}
+                  alt=""
+                />
+              </div>
+            );
+          })}
       </div>
 
       <div className="details_section">
@@ -61,18 +94,7 @@ const SingleMovie = () => {
           <p className="section_title">Overview</p>
 
           <span className={`movie_overview ${expandOverview && "expand"}`}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat,
-            nobis quam ipsum ratione accusantium rerum, voluptates corrupti
-            nesciunt quasi doloremque pariatur corporis quidem amet sapiente
-            quibusdam praesentium sequi libero molestiae, officiis totam!
-            Laborum nobis expedita rem ratione, earum, corporis sunt adipisci
-            fugiat, repellat nam ut libero qui quam magni cum magnam
-            consequuntur non architecto eius doloribus ex unde sit dolor? Minus
-            cum, aspernatur aperiam eligendi harum libero maiores aliquid.
-            Labore consequuntur veniam reiciendis, molestiae dolorem itaque
-            consectetur nisi nihil rerum dicta nostrum in, iure sit quis numquam
-            voluptas voluptatibus explicabo! Cupiditate sapiente ea minus
-            corrupti non quis laboriosam commodi repellendus.
+            {movieDetails.overview || "loading..."}
             <div
               className="show_more"
               onClick={() => {
@@ -83,7 +105,7 @@ const SingleMovie = () => {
             </div>
           </span>
 
-          <MovieInfo />
+          <MovieInfo data={movieDetails} />
           <CTAButtons />
         </div>
 
@@ -92,27 +114,13 @@ const SingleMovie = () => {
 
           <div className="casts">
             <div className="wrapper">
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
-              <Cast avatar={avatar1} />
-              <Cast avatar={avatar2} />
-              <Cast avatar={avatar3} />
+              {cast.map((cast) => (
+                <Cast
+                  key={cast.cast_id}
+                  profile={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
+                  name={cast.original_name}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -122,63 +130,85 @@ const SingleMovie = () => {
             <p className="section_title">Similar</p>
 
             <div className="wrapper">
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
-              <Movie movie_banner={dune} type="small" link="/movie/id" />
+              {similarMovies.length > 0 &&
+                similarMovies.map((movie) => {
+                  return (
+                    <Movie
+                      key={movie.id}
+                      movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                      type="medium"
+                      link={`/movie/${movie.id}`}
+                      content={movie}
+                    />
+                  );
+                })}
             </div>
           </div>
 
-          <div className="meta_data">
-            <p className="section_title">About</p>
+          <div className="more_data">
+            <p className="section_title">Info</p>
 
             <div className="content">
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Release Date</div>
+                <span>-</span>
+                <div className="val">{movieDetails?.release_date}</div>
               </div>
 
               <hr />
 
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Total Votes</div>
+                <span>-</span>
+
+                <div className="val">{movieDetails?.vote_count}</div>
               </div>
 
               <hr />
 
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Rating</div>
+                <span>-</span>
+
+                <div className="val">{movieDetails?.vote_average}</div>
               </div>
 
               <hr />
 
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Budget</div>
+                <span>-</span>
+
+                <div className="val">{movieDetails?.budget}</div>
               </div>
 
               <hr />
 
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Revenue</div>
+                <span>-</span>
+
+                <div className="val">{movieDetails?.revenue}</div>
               </div>
               <hr />
 
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Popularity</div>
+                <span>-</span>
+
+                <div className="val">{movieDetails?.popularity}</div>
               </div>
               <hr />
 
-              <div className="x">
-                <div className="key">Year</div>
-                <div className="val">2023</div>
+              <div className="data">
+                <div className="key">Production Companies</div>
+                <span>-</span>
+
+                <div className="val">
+                  {movieDetails?.production_companies?.map((company) => {
+                    return company.name + ", ";
+                  })}
+                </div>
               </div>
             </div>
           </div>

@@ -115,10 +115,9 @@
 
     .overview_section {
       display: flex;
-      width: min(100%, 700px);
+      width: min(100%, 600px);
       flex: 1;
       flex-direction: column;
-      align-self: flex-end;
       align-self: flex-start;
       align-items: flex-start;
       padding: 0 var(--padding) var(--padding);
@@ -134,7 +133,7 @@
         letter-spacing: 1px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 5;
         overflow: hidden;
 
         &.expand {
@@ -175,7 +174,7 @@
     }
 
     .cast_section {
-      width: min(100%, 500px);
+      width: min(100%, 600px);
       display: flex;
       flex-direction: column;
       gap: 15px;
@@ -211,6 +210,7 @@
     .more_info {
       width: 100%;
       display: flex;
+      justify-content: flex-start;
       flex-wrap: wrap;
       gap: 5px;
       margin-top: 30px;
@@ -218,8 +218,9 @@
       .similar_movies {
         display: flex;
         flex-direction: column;
-        max-width: 65%;
+        width: 75%;
         gap: 15px;
+        flex-grow: 1;
 
         .section_title {
           margin-left: var(--padding);
@@ -233,13 +234,12 @@
         }
       }
 
-      .meta_data {
+      .more_data {
         min-width: min(100%, 400px);
         display: flex;
         flex-direction: column;
         gap: 10px;
         padding: 0 var(--padding) var(--padding);
-        margin-left: auto;
 
         .content {
           background-color: var(--bg-dark);
@@ -248,12 +248,13 @@
           display: flex;
           flex-direction: column;
 
-          .x {
+          .data {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 55px;
             padding: var(--padding) 20px;
+            gap: 20px;
           }
 
           hr {
@@ -266,12 +267,8 @@
   }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .single_movie_page {
-    .slide_container {
-      min-height: 40vh;
-    }
-
     .cast_section {
       min-width: 100%;
     }
@@ -282,7 +279,7 @@
 
     .details_section {
       .more_info {
-        .meta_data {
+        .more_data {
           margin: 30px 0;
           min-width: 100%;
         }
@@ -294,6 +291,10 @@
 @media (max-width: 600px) {
   .single_movie_page {
     --padding: var(--sm-padding);
+
+    .slide_container {
+      min-height: 40vh;
+    }
 
     header {
       .return {
