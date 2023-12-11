@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, json } from "react-router-dom";
 import App from "./App";
 import Home from "./Pages/Home/Home";
 import Movies from "./Pages/Movies/Movies";
@@ -8,12 +8,87 @@ import SingleMovie from "./Pages/SingleMovie/SingleMovie";
 import TVShows from "./Pages/TVShows/TVShows";
 import ErrorPage from "./Pages/ErrorPage/ErrorPage";
 import WatchPage from "./Pages/WatchPage/WatchPage";
+import {
+  AiringToday,
+  MovieCredits,
+  MovieDetails,
+  MovieImages,
+  NowPlaying,
+  PopularMovies,
+  PopularShows,
+  SimilarMovies,
+  TopRatedMovies,
+  TopRatedShows,
+  TrendingMovies,
+  UpcomingMovies,
+} from "./Data/Data";
+
+async function DataLoader() {
+  try {
+    const [
+      popularMovies,
+      topRatedMovies,
+      nowPlaying,
+      trendingMovies,
+      upcomingMovies,
+      popularShows,
+      topRatedShows,
+      airingToday,
+    ] = await Promise.all([
+      PopularMovies(),
+      TopRatedMovies(),
+      NowPlaying(),
+      TrendingMovies(),
+      UpcomingMovies(),
+      PopularShows(),
+      TopRatedShows(),
+      AiringToday(),
+    ])
+      .then((responses) => responses.map((response) => response.results))
+      .catch((err) => {
+        console.log("Error fetching data", err);
+      });
+
+    return {
+      popularMovies,
+      topRatedMovies,
+      nowPlaying,
+      trendingMovies,
+      upcomingMovies,
+      popularShows,
+      topRatedShows,
+      airingToday,
+    };
+  } catch {
+    console.log("unable to fetch data");
+  } finally {
+    console.log("Data fetch completed");
+  }
+}
+
+async function SingleMovieLoader({ params }) {
+  const [movieDetails, movieImages, similarMovies, cast] = await Promise.all([
+    MovieDetails(params.mediaType, params.id),
+    MovieImages(params.mediaType, params.id),
+    SimilarMovies(params.mediaType, params.id),
+    MovieCredits(params.mediaType, params.id),
+  ]);
+
+  return {
+    movieDetails,
+    movieImages,
+    similarMovies,
+    cast,
+  };
+}
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    loader: DataLoader,
     errorElement: <ErrorPage />,
+    id: "root",
 
     children: [
       {
@@ -37,7 +112,8 @@ export const router = createBrowserRouter([
         element: <Library />,
       },
       {
-        path: "movie/:id",
+        path: "/:mediaType/:id",
+        loader: SingleMovieLoader,
         element: <SingleMovie />,
       },
       {

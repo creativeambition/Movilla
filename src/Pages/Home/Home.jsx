@@ -1,11 +1,6 @@
 import Featured from "../../components/Featured/Featured";
 import Movie from "../../components/Movie/Movie";
 
-import avengers from "../../assets/movies/avengers.png";
-import spider from "../../assets/movies/spider.jpg";
-import spiderman from "../../assets/movies/spiderman.jpg";
-import witcher from "../../assets/movies/witcher.png";
-import mario from "../../assets/movies/mario.png";
 import dune from "../../assets/movies/dune.png";
 import fav from "../../assets/movies/fav.gif";
 import Genre from "../../components/Genre/Genre";
@@ -18,66 +13,11 @@ import scifi from "../../assets/genre/sci-fi.png";
 import war from "../../assets/genre/war.png";
 import fantasy from "../../assets/genre/fantasy.png";
 import crime from "../../assets/genre/crime.png";
-import { useEffect, useState } from "react";
-import {
-  AiringToday,
-  NowPlaying,
-  PopularMovies,
-  PopularShows,
-  TopRatedMovies,
-  TopRatedShows,
-  TrendingMovies,
-  UpcomingMovies,
-} from "../../Data/Data";
+
+import { useRouteLoaderData } from "react-router-dom";
 
 const Home = () => {
-  const [popularMovies, setPopularMovies] = useState([]);
-  const [topRatedMovies, setTopRatedMovies] = useState([]);
-  const [nowPlaying, setNowPlaying] = useState([]);
-  const [trendingMovies, setTrendingMovies] = useState([]);
-  const [upcomingMovies, setUpcomingMovies] = useState([]);
-
-  const [popularShows, setPopularShows] = useState([]);
-  const [topRatedShows, setTopRatedShows] = useState([]);
-  const [airingToday, setAiringToday] = useState([]);
-
-  useEffect(() => {
-    function fetchData() {
-      PopularMovies().then((data) => {
-        setPopularMovies(data.results);
-      });
-
-      TopRatedMovies().then((data) => {
-        setTopRatedMovies(data.results);
-      });
-
-      NowPlaying().then((data) => {
-        setNowPlaying(data.results);
-      });
-
-      TrendingMovies().then((data) => {
-        setTrendingMovies(data.results);
-      });
-
-      UpcomingMovies().then((data) => {
-        setUpcomingMovies(data.results);
-      });
-
-      PopularShows().then((data) => {
-        setPopularShows(data.results);
-      });
-
-      TopRatedShows().then((data) => {
-        setTopRatedShows(data.results);
-      });
-
-      AiringToday().then((data) => {
-        setAiringToday(data.results);
-      });
-    }
-
-    fetchData();
-  }, []);
+  const data = useRouteLoaderData("root");
 
   return (
     <>
@@ -89,16 +29,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {popularMovies.length > 3 &&
-            popularMovies.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                type="medium"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.popularMovies.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              type="medium"
+              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -120,7 +59,7 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Genre link={"/movies/#action"} banner={action} category="Action" />
+          <Genre link={"/movies"} banner={action} category="Action" />
           <Genre link={"/movies"} banner={animated} category="Animation" />
           <Genre link={"/movies"} banner={adventure} category="Adventure" />
           <Genre link={"/movies"} banner={comedy} category="Comedy" />
@@ -145,16 +84,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {topRatedMovies.length > 3 &&
-            topRatedMovies.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                type="long"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.topRatedMovies.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="long"
+              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -166,16 +104,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {nowPlaying.length > 3 &&
-            nowPlaying.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                type="wide"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.nowPlaying.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="wide"
+              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -185,16 +122,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {trendingMovies.length > 3 &&
-            trendingMovies.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                type="long"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.trendingMovies.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="long"
+              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -204,16 +140,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {upcomingMovies.length > 3 &&
-            upcomingMovies.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                type="medium"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.upcomingMovies.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              type="medium"
+              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -235,16 +170,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {popularShows.length > 3 &&
-            popularShows.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                type="long"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.popularShows.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="long"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -254,16 +188,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {topRatedShows.length > 3 &&
-            topRatedShows.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                type="medium"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.topRatedShows.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+              type="medium"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -273,16 +206,15 @@ const Home = () => {
         </header>
 
         <div className="movies_wrapper">
-          {airingToday.length > 3 &&
-            airingToday.map((movie) => (
-              <Movie
-                key={movie.id}
-                movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-                type="wide"
-                link={`movie/${movie.id}`}
-                content={movie}
-              />
-            ))}
+          {data.airingToday.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="wide"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
     </>

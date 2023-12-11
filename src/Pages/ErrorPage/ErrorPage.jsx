@@ -1,18 +1,21 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
 import "./ErrorPage.scss";
 
 const ErrorPage = () => {
   const navigate = useNavigate();
+  const error = useRouteError();
+
+  console.log("Hello from error element ->", error);
 
   return (
     <div className="error-page">
-      <h3>Error 404</h3>
+      <h3>An error occurred</h3>
 
       <p>No such page found</p>
 
       <button
         onClick={() => {
-          navigate(-1);
+          navigate("/");
         }}
       >
         Return

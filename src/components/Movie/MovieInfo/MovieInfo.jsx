@@ -13,7 +13,7 @@ const MovieInfo = ({ data }) => {
         setGenreList(data);
       });
     }
-  }, [data]);
+  }, []);
 
   return (
     <div className="movie_info">
@@ -26,10 +26,7 @@ const MovieInfo = ({ data }) => {
 
       <div className="info genre_list">
         <BiTimeFive className="icon" />
-        {genreList.length > 0 && <span>{genreList[0].name}</span>}
-        {data?.genres?.map((genre) => {
-          return <span key={genre.id}>{genre.name},</span>;
-        })}
+        {<span>{genreList[0]?.name || "..."}</span>}
       </div>
     </div>
   );

@@ -16,13 +16,13 @@ const Movie = ({ movie_banner, type, link, content }) => {
 
       <div className="details">
         <span className="title">
-          {content?.title ||
-            content?.original_title ||
-            content?.name ||
-            content?.original_name ||
+          {content.title ||
+            content.original_title ||
+            content.name ||
+            content.original_name ||
             "loading..."}
         </span>
-        {type == "wide" && <p className="desc">{content?.overview}</p>}
+        {type == "wide" && <p className="desc">{content.overview}</p>}
 
         <MovieInfo data={content} />
       </div>

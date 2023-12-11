@@ -18,7 +18,10 @@
     font-size: 12px;
     text-align: center;
     font-weight: 500;
-    max-width: 80%;
+    max-width: 100%;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
   }

@@ -4,49 +4,28 @@ import dune from "../../assets/movies/dune.png";
 import Movie from "../../components/Movie/Movie";
 import Cast from "../../components/CastProfile/Cast";
 
-import avatar1 from "../../assets/cast/3.jpg";
-import avatar2 from "../../assets/cast/1.jpg";
-import avatar3 from "../../assets/cast/11.jpg";
 import { BiShareAlt, BiStar } from "react-icons/bi";
 import { GoShare } from "react-icons/go";
 import { FiBookmark } from "react-icons/fi";
 import { FaChevronLeft } from "react-icons/fa";
-import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
 import MovieInfo from "../../components/Movie/MovieInfo/MovieInfo";
 import CTAButtons from "../../components/CTAButtons/CTAButtons";
-import {
-  MovieCredits,
-  MovieDetails,
-  MovieImages,
-  MovieVideos,
-  SimilarMovies,
-} from "../../Data/Data";
 
 const SingleMovie = () => {
   const navigate = useNavigate();
 
   const [expandOverview, setexpandOverview] = useState(false);
 
-  const { id } = useParams();
-
-  const [movieDetails, setMovieDetails] = useState([]);
-  const [movieImages, setMovieImages] = useState([]);
-  const [similarMovies, setSimilarMovies] = useState([]);
-  const [cast, setCast] = useState([]);
-
-  useEffect(() => {
-    MovieDetails(id).then((data) => setMovieDetails(data));
-    MovieImages(id).then((data) => setMovieImages(data.backdrops));
-    SimilarMovies(id).then((data) => setSimilarMovies(data.results));
-    MovieCredits(id).then((data) => setCast(data.cast));
-  }, [id]);
+  const data = useLoaderData();
+  const params = useParams();
 
   return (
     <div className="single_movie_page">
       <div className="movie_banner">
         <img
-          src={`https://image.tmdb.org/t/p/original${movieDetails?.backdrop_path}`}
+          src={`https://image.tmdb.org/t/p/original${data.movieDetails.backdrop_path}`}
           alt=""
         />
       </div>
@@ -60,11 +39,10 @@ const SingleMovie = () => {
         />
 
         <h2 className="movie_title">
-          {movieDetails.title ||
-            movieDetails.original_title ||
-            movieDetails.name ||
-            movieDetails.original_name ||
-            "loading..."}
+          {data.movieDetails.title ||
+            data.movieDetails.original_title ||
+            data.movieDetails.name ||
+            data.movieDetails.original_name}
         </h2>
 
         <div className="tools">
@@ -76,17 +54,16 @@ const SingleMovie = () => {
       </header>
 
       <div className="slide_container">
-        {movieImages.length > 0 &&
-          movieImages.map((img) => {
-            return (
-              <div className="slide" key={img.file_path}>
-                <img
-                  src={`https://image.tmdb.org/t/p/original${img.file_path}`}
-                  alt=""
-                />
-              </div>
-            );
-          })}
+        {data.movieImages.backdrops.map((img) => {
+          return (
+            <div className="slide" key={img.file_path}>
+              <img
+                src={`https://image.tmdb.org/t/p/original${img.file_path}`}
+                alt=""
+              />
+            </div>
+          );
+        })}
       </div>
 
       <div className="details_section">
@@ -94,7 +71,7 @@ const SingleMovie = () => {
           <p className="section_title">Overview</p>
 
           <span className={`movie_overview ${expandOverview && "expand"}`}>
-            {movieDetails.overview || "loading..."}
+            {data.movieDetails.overview || "loading..."}
             <div
               className="show_more"
               onClick={() => {
@@ -105,7 +82,7 @@ const SingleMovie = () => {
             </div>
           </span>
 
-          <MovieInfo data={movieDetails} />
+          <MovieInfo data={data.movieDetails} />
           <CTAButtons />
         </div>
 
@@ -114,7 +91,7 @@ const SingleMovie = () => {
 
           <div className="casts">
             <div className="wrapper">
-              {cast.map((cast) => (
+              {data.cast.cast.map((cast) => (
                 <Cast
                   key={cast.cast_id}
                   profile={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
@@ -130,18 +107,19 @@ const SingleMovie = () => {
             <p className="section_title">Similar</p>
 
             <div className="wrapper">
-              {similarMovies.length > 0 &&
-                similarMovies.map((movie) => {
-                  return (
-                    <Movie
-                      key={movie.id}
-                      movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-                      type="medium"
-                      link={`/movie/${movie.id}`}
-                      content={movie}
-                    />
-                  );
-                })}
+              {data.similarMovies.map((movie) => {
+                return (
+                  <Movie
+                    key={movie.id}
+                    movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+                    type="medium"
+                    link={`/${movie.media_type || params.mediaType}/${
+                      movie.id
+                    }`}
+                    content={movie}
+                  />
+                );
+              })}
             </div>
           </div>
 
@@ -152,7 +130,9 @@ const SingleMovie = () => {
               <div className="data">
                 <div className="key">Release Date</div>
                 <span>-</span>
-                <div className="val">{movieDetails?.release_date}</div>
+                <div className="val" title={data.movieDetails.release_date}>
+                  {data.movieDetails.release_date}
+                </div>
               </div>
 
               <hr />
@@ -161,7 +141,9 @@ const SingleMovie = () => {
                 <div className="key">Total Votes</div>
                 <span>-</span>
 
-                <div className="val">{movieDetails?.vote_count}</div>
+                <div className="val" title={data.movieDetails.vote_count}>
+                  {data.movieDetails.vote_count}
+                </div>
               </div>
 
               <hr />
@@ -170,7 +152,9 @@ const SingleMovie = () => {
                 <div className="key">Rating</div>
                 <span>-</span>
 
-                <div className="val">{movieDetails?.vote_average}</div>
+                <div className="val" title={data.movieDetails.vote_average}>
+                  {data.movieDetails.vote_average}
+                </div>
               </div>
 
               <hr />
@@ -179,7 +163,9 @@ const SingleMovie = () => {
                 <div className="key">Budget</div>
                 <span>-</span>
 
-                <div className="val">{movieDetails?.budget}</div>
+                <div className="val" title={data.movieDetails.budget}>
+                  {data.movieDetails.budget}
+                </div>
               </div>
 
               <hr />
@@ -188,7 +174,9 @@ const SingleMovie = () => {
                 <div className="key">Revenue</div>
                 <span>-</span>
 
-                <div className="val">{movieDetails?.revenue}</div>
+                <div className="val" title={data.movieDetails.revenue}>
+                  {data.movieDetails.revenue}
+                </div>
               </div>
               <hr />
 
@@ -196,7 +184,9 @@ const SingleMovie = () => {
                 <div className="key">Popularity</div>
                 <span>-</span>
 
-                <div className="val">{movieDetails?.popularity}</div>
+                <div className="val" title={data.movieDetails.popularity}>
+                  {data.movieDetails.popularity}
+                </div>
               </div>
               <hr />
 
@@ -204,10 +194,19 @@ const SingleMovie = () => {
                 <div className="key">Production Companies</div>
                 <span>-</span>
 
-                <div className="val">
-                  {movieDetails?.production_companies?.map((company) => {
-                    return company.name + ", ";
-                  })}
+                <div
+                  className="val"
+                  title={data.movieDetails.production_companies
+                    .map((company) => {
+                      return company.name;
+                    })
+                    .join(",")}
+                >
+                  {data.movieDetails.production_companies
+                    .map((company) => {
+                      return company.name;
+                    })
+                    .join(",")}
                 </div>
               </div>
             </div>

@@ -130,7 +130,7 @@
         line-height: 25px;
         color: var(--text-color-alt);
         margin-top: 5px;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 5;
@@ -149,8 +149,8 @@
         .show_more {
           position: absolute;
           bottom: 0;
-          right: 0;
           left: 0;
+          right: 0;
           background: linear-gradient(
             90deg,
             transparent,
@@ -160,7 +160,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          padding: 5px 10px;
+          padding: 4px;
           border-bottom: 1px solid var(--universal-color);
           cursor: pointer;
         }
@@ -235,7 +235,7 @@
       }
 
       .more_data {
-        min-width: min(100%, 400px);
+        width: min(100%, 500px);
         display: flex;
         flex-direction: column;
         gap: 10px;
@@ -255,6 +255,16 @@
             height: 55px;
             padding: var(--padding) 20px;
             gap: 20px;
+
+            .key {
+              white-space: nowrap;
+            }
+
+            .val {
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis;
+            }
           }
 
           hr {
@@ -292,10 +302,6 @@
   .single_movie_page {
     --padding: var(--sm-padding);
 
-    .slide_container {
-      min-height: 40vh;
-    }
-
     header {
       .return {
         display: flex;
@@ -315,6 +321,18 @@
 
       .slide {
         min-width: 95%;
+      }
+    }
+
+    .details_section {
+      .section_title {
+        font-size: 16px;
+      }
+
+      .overview_section {
+        .movie_overview {
+          font-size: 14px;
+        }
       }
     }
   }

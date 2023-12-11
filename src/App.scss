@@ -86,12 +86,12 @@
       border-radius: 50%;
       padding: 6px;
       cursor: pointer;
-      border: 1px solid transparent;
+      border: 1px solid var(--universal-color);
       transition: 0.2s ease;
 
       &:hover {
         background-color: var(--universal-color);
-        border-color: var(--universal-color);
+        border-color: var(--text-color-alt);
       }
     }
 
