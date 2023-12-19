@@ -46,7 +46,7 @@ async function DataLoader() {
     ])
       .then((responses) => responses.map((response) => response.results))
       .catch((err) => {
-        console.log("Error fetching data", err);
+        console.error("Error fetching data", err);
       });
 
     return {
@@ -60,9 +60,7 @@ async function DataLoader() {
       airingToday,
     };
   } catch {
-    console.log("unable to fetch data");
-  } finally {
-    console.log("Data fetch completed");
+    console.error("unable to fetch data");
   }
 }
 

@@ -93,10 +93,10 @@ export async function AiringToday() {
 }
 
 // Others
-export async function getGenreList(ids) {
+export async function getGenreList(ids, mediaType) {
   try {
     const response = await axiosInstance.get(
-      `/genre/movie/list?api_key=${apiKey}`
+      `/genre/${mediaType}/list?api_key=${apiKey}`
     );
 
     let genres = response.data.genres;
@@ -110,7 +110,7 @@ export async function getGenreList(ids) {
 
     return list;
   } catch (error) {
-    console.log("Error getting genre list");
+    console.log("Error getting genre list", error);
   }
 }
 

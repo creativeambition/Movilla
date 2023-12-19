@@ -4,8 +4,14 @@ import avengers from "../../assets/movies/avengers.png";
 import mario from "../../assets/movies/mario.png";
 import witcher from "../../assets/movies/witcher.png";
 import { FiTv } from "react-icons/fi";
+import { useRouteLoaderData } from "react-router-dom";
 
 const TVShows = () => {
+  const { popularShows, airingToday, topRatedShows } =
+    useRouteLoaderData("root");
+
+  // console.log(popularShows);
+
   return (
     <div className="page tv-shows">
       <div className="page_header">
@@ -15,13 +21,15 @@ const TVShows = () => {
 
       <section>
         <div className="movies_wrapper">
-          <Movie movie_banner={avengers} type="wide" link="/movie/movie_id" />
-          <Movie movie_banner={witcher} type="wide" link="/movie/movie_id" />
-          <Movie movie_banner={mario} type="wide" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
-
-          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="wide" link="/movie/movie_id" />
+          {popularShows.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="wide"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -31,12 +39,15 @@ const TVShows = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="long" link="/movie/movie_id" />
+          {airingToday.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="long"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 
@@ -46,17 +57,15 @@ const TVShows = () => {
         </header>
 
         <div className="movies_wrapper">
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
-          <Movie movie_banner={dune} type="medium" link="/movie/movie_id" />
+          {topRatedShows.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="medium"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
         </div>
       </section>
 

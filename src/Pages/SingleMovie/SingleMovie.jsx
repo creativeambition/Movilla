@@ -5,11 +5,11 @@ import Movie from "../../components/Movie/Movie";
 import Cast from "../../components/CastProfile/Cast";
 
 import { BiShareAlt, BiStar } from "react-icons/bi";
-import { GoShare } from "react-icons/go";
+import { GoArrowLeft, GoShare } from "react-icons/go";
 import { FiBookmark } from "react-icons/fi";
-import { FaChevronLeft } from "react-icons/fa";
+import { BsArrow90DegLeft } from "react-icons/bs";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieInfo from "../../components/Movie/MovieInfo/MovieInfo";
 import CTAButtons from "../../components/CTAButtons/CTAButtons";
 
@@ -31,7 +31,7 @@ const SingleMovie = () => {
       </div>
 
       <header>
-        <FaChevronLeft
+        <BsArrow90DegLeft
           className="return action_icon"
           onClick={() => {
             navigate(-1);
@@ -71,7 +71,7 @@ const SingleMovie = () => {
           <p className="section_title">Overview</p>
 
           <span className={`movie_overview ${expandOverview && "expand"}`}>
-            {data.movieDetails.overview || "loading..."}
+            {data.movieDetails.overview}
             <div
               className="show_more"
               onClick={() => {
@@ -82,7 +82,7 @@ const SingleMovie = () => {
             </div>
           </span>
 
-          <MovieInfo data={data.movieDetails} />
+          <MovieInfo data={data.movieDetails} mediaType={params.mediaType} />
           <CTAButtons />
         </div>
 
@@ -93,7 +93,7 @@ const SingleMovie = () => {
             <div className="wrapper">
               {data.cast.cast.map((cast) => (
                 <Cast
-                  key={cast.cast_id}
+                  key={cast.cast_id || Math.random() * 1000000}
                   profile={`https://image.tmdb.org/t/p/original${cast.profile_path}`}
                   name={cast.original_name}
                 />
@@ -113,9 +113,7 @@ const SingleMovie = () => {
                     key={movie.id}
                     movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
                     type="medium"
-                    link={`/${movie.media_type || params.mediaType}/${
-                      movie.id
-                    }`}
+                    link={`/${params.mediaType}/${movie.id}`}
                     content={movie}
                   />
                 );

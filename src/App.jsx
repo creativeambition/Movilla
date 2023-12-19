@@ -4,7 +4,7 @@ import Header from "./components/Header/Header";
 import Navigation from "./components/Navigation/Navigation";
 import { SharedContext } from "./SharedContext";
 
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigation } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import Profile from "./components/Profile/Profile";
 import ResetScrollPosition from "./components/ResetScrollPosition/ResetScrollPosition";
@@ -23,6 +23,8 @@ function App() {
   const [ThemeOptions, setThemeOptions] = useState(false);
   const [ShowProfile, setShowProfile] = useState(false);
 
+  const navigation = useNavigation();
+
   useEffect(() => {
     const themes = document.querySelectorAll(".theme_colors .theme");
 
@@ -31,16 +33,15 @@ function App() {
         settheme(it.getAttribute("data-theme"));
       });
     });
-  });
 
-  function checkWindow() {
-    if (window.innerWidth <= 600) {
-      setmobileView(true);
-    } else {
-      setmobileView(false);
+    function checkWindow() {
+      if (window.innerWidth <= 600) {
+        setmobileView(true);
+      } else {
+        setmobileView(false);
+      }
     }
-  }
-  useEffect(() => {
+
     checkWindow();
 
     window.addEventListener("resize", () => {
@@ -65,7 +66,8 @@ function App() {
   return (
     <div
       className={`app ${theme}_theme ${
-        NavActive || ShowProfile ? "drop_blinds" : null
+        (NavActive || ShowProfile || navigation.state == "loading") &&
+        "drop_blinds"
       }`}
     >
       <SharedContext.Provider

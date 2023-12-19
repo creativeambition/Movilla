@@ -8,6 +8,7 @@
   overflow: hidden;
   box-shadow: 0 12px 10px -10px var(--bg-darker);
   scroll-snap-align: center;
+  transition: transform 0.4s ease;
 
   &::after {
     position: absolute;
@@ -68,6 +69,10 @@
       -webkit-line-clamp: 2;
       overflow: hidden;
     }
+  }
+
+  &:active {
+    transform: scale(0.96);
   }
 
   img {
