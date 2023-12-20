@@ -1,7 +1,8 @@
 import "./Featured.scss";
 import banner from "../../assets/movies/raya.jpg";
 
-import { FiBookmark, FiStar } from "react-icons/fi";
+import { FiBookmark } from "react-icons/fi";
+import { TbStar } from "react-icons/tb";
 import MovieInfo from "../Movie/MovieInfo/MovieInfo";
 import { GoShare } from "react-icons/go";
 import { BiShareAlt } from "react-icons/bi";
@@ -32,7 +33,7 @@ const Featured = () => {
             <GoShare className="action_icon visit" title="Visit" />
             <BiShareAlt className="action_icon share" title="Share" />
             <FiBookmark className="action_icon favorite" title="Bookmark" />
-            <FiStar className="action_icon star" title="Favorite" />
+            <TbStar className="action_icon star" title="Favorite" />
           </div>
         </div>
 

@@ -1,5 +1,5 @@
 import "./Movie.scss";
-import { BiStar } from "react-icons/bi";
+import { TbStar } from "react-icons/tb";
 import MovieInfo from "./MovieInfo/MovieInfo";
 import { Link } from "react-router-dom";
 
@@ -11,7 +11,7 @@ const Movie = ({ movie_banner, type, link }) => {
       </Link>
 
       <div className="add_to_fav" title="Add to favorite">
-        <BiStar className="icon" />
+        <TbStar className="icon" />
       </div>
 
       <div className="details">

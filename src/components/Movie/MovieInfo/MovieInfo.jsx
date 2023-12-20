@@ -1,21 +1,21 @@
 import "./MovieInfo.scss";
-import { AiOutlineStar } from "react-icons/ai";
-import { BiTimeFive } from "react-icons/bi";
+import { TbStar } from "react-icons/tb";
+import { BiCollection } from "react-icons/bi";
 
 const MovieInfo = () => {
   return (
     <div className="movie_info">
-      <span>2023</span>
+      <div className="info duration">
+        <BiCollection className="icon" />
+        <span>Animation</span>
+      </div>
 
       <div className="info rating">
-        <AiOutlineStar className="icon" />
+        <TbStar className="icon" />
         <span>4.5</span>
       </div>
 
-      <div className="info duration">
-        <BiTimeFive className="icon" />
-        <span>1.5</span>
-      </div>
+      <span>2023</span>
     </div>
   );
 };

@@ -6,8 +6,10 @@ import { SharedContext } from "../../SharedContext";
 import { RiMenu4Fill } from "react-icons/ri";
 
 import { RiHome5Line } from "react-icons/ri";
-import { FiStar, FiTv } from "react-icons/fi";
-import { BiLibrary, BiMovie } from "react-icons/bi";
+import { FiStar } from "react-icons/fi";
+import { MdOutlineMovie } from "react-icons/md";
+import { BiLibrary } from "react-icons/bi";
+import { PiTelevision } from "react-icons/pi";
 
 import { MdOutlineFormatPaint } from "react-icons/md";
 
@@ -34,8 +36,8 @@ const Navigation = () => {
         <div className="indicator"></div>
 
         <Nav Icon={RiHome5Line} title="Home" link="/" index={0} />
-        <Nav Icon={BiMovie} title="Movies" link="movies" index={1} />
-        <Nav Icon={FiTv} title="TV Shows" link="tv-shows" index={2} />
+        <Nav Icon={MdOutlineMovie} title="Movies" link="movies" index={1} />
+        <Nav Icon={PiTelevision} title="TV Shows" link="tv-shows" index={2} />
         <Nav Icon={FiStar} title="Favorites" link="favorites" index={3} />
         <Nav Icon={BiLibrary} title="Library" link="library" index={4} />
       </div>
