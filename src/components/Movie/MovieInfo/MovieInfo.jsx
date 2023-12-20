@@ -36,10 +36,8 @@ const MovieInfo = ({ data, mediaType, showAll }) => {
         <span>
           {showAll
             ? genreList.map((g) => g.name).join(", ")
-            : genreList[0]?.name}
+            : genreList[0]?.name ?? "Action & Adventure"}
         </span>
-
-        {/* <span>{genreList[0]?.name || "x"}</span> */}
       </div>
     </div>
   );
