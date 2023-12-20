@@ -81,6 +81,7 @@
     }
 
     .action_icon {
+      min-width: fit-content;
       font-size: 32px;
       color: var(--text-color-alt);
       border-radius: 50%;
