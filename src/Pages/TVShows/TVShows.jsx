@@ -1,9 +1,6 @@
 import Movie from "../../components/Movie/Movie";
 import dune from "../../assets/movies/dune.png";
-import avengers from "../../assets/movies/avengers.png";
-import mario from "../../assets/movies/mario.png";
-import witcher from "../../assets/movies/witcher.png";
-import { FiTv } from "react-icons/fi";
+import { PiTelevision } from "react-icons/pi";
 import { useRouteLoaderData } from "react-router-dom";
 
 const TVShows = () => {
@@ -15,7 +12,7 @@ const TVShows = () => {
   return (
     <div className="page tv-shows">
       <div className="page_header">
-        <FiTv />
+        <PiTelevision />
         TV Shows
       </div>
 
@@ -35,24 +32,6 @@ const TVShows = () => {
 
       <section>
         <header>
-          <span className="section_title">Airing Today</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {airingToday.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="long"
-              link={`/tv/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <header>
           <span className="section_title">Top Rated</span>
         </header>
 
@@ -62,6 +41,24 @@ const TVShows = () => {
               key={movie.id}
               movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
               type="medium"
+              link={`/tv/${movie.id}`}
+              content={movie}
+            />
+          ))}
+        </div>
+      </section>
+
+      <section>
+        <header>
+          <span className="section_title">Airing Today</span>
+        </header>
+
+        <div className="movies_wrapper">
+          {airingToday.map((movie) => (
+            <Movie
+              key={movie.id}
+              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+              type="long"
               link={`/tv/${movie.id}`}
               content={movie}
             />

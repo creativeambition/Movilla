@@ -1,4 +1,4 @@
-import { createBrowserRouter, json } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
 import Home from "./Pages/Home/Home";
 import Movies from "./Pages/Movies/Movies";
@@ -60,7 +60,7 @@ async function DataLoader() {
       airingToday,
     };
   } catch {
-    console.error("unable to fetch data");
+    console.error("Unable to fetch data");
   }
 }
 

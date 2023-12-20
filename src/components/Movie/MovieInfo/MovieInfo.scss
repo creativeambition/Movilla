@@ -6,6 +6,7 @@
   color: var(--text-color);
   width: 100%;
   white-space: nowrap;
+  overflow: auto;
 
   span {
     color: var(--text-color-alt);

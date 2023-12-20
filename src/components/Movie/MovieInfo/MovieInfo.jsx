@@ -8,7 +8,7 @@ const MovieInfo = ({ data, mediaType, showAll }) => {
   const [genreList, setGenreList] = useState([]);
 
   useEffect(() => {
-    if (data) {
+    if (data && mediaType) {
       if (data.genres) {
         setGenreList(data.genres);
       } else {
@@ -28,7 +28,11 @@ const MovieInfo = ({ data, mediaType, showAll }) => {
 
       <div className="info rating">
         <TbStar className="icon" />
-        <span>{parseFloat(data?.vote_average).toPrecision(2) || "7.9"}</span>
+        <span>
+          {data?.vote_average
+            ? Number(data?.vote_average).toPrecision(2)
+            : "7.9"}
+        </span>
       </div>
 
       <div className="info genre_list">

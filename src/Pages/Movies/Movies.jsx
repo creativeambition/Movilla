@@ -1,5 +1,5 @@
 import Movie from "../../components/Movie/Movie";
-import { BiMovie } from "react-icons/bi";
+import { MdOutlineMovie } from "react-icons/md";
 import { useRouteLoaderData } from "react-router-dom";
 
 const Movies = () => {
@@ -8,7 +8,7 @@ const Movies = () => {
   return (
     <div className="page movies_page">
       <div className="page_header">
-        <BiMovie />
+        <MdOutlineMovie />
         Movies
       </div>
 
