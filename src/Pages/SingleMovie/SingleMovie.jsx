@@ -1,15 +1,13 @@
 import "./SingleMovie.scss";
-import avengers from "../../assets/movies/avengers.png";
-import dune from "../../assets/movies/dune.png";
 import Movie from "../../components/Movie/Movie";
 import Cast from "../../components/CastProfile/Cast";
 
 import { BiShareAlt, BiStar } from "react-icons/bi";
-import { GoArrowLeft, GoShare } from "react-icons/go";
+import { GoShare } from "react-icons/go";
 import { FiBookmark } from "react-icons/fi";
 import { BsArrow90DegLeft } from "react-icons/bs";
 import { useLoaderData, useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import MovieInfo from "../../components/Movie/MovieInfo/MovieInfo";
 import CTAButtons from "../../components/CTAButtons/CTAButtons";
 
