@@ -9,8 +9,9 @@ import avatar2 from "../../assets/cast/1.jpg";
 import avatar3 from "../../assets/cast/11.jpg";
 import { BiShareAlt, BiStar } from "react-icons/bi";
 import { GoShare } from "react-icons/go";
-import { FiBookmark } from "react-icons/fi";
-import { FaChevronLeft } from "react-icons/fa";
+import { FiBookmark, FiChevronsUp } from "react-icons/fi";
+import { FiChevronsDown } from "react-icons/fi";
+import { PiArrowLeftBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import MovieInfo from "../../components/Movie/MovieInfo/MovieInfo";
@@ -27,7 +28,7 @@ const SingleMovie = () => {
       </div>
 
       <header>
-        <FaChevronLeft
+        <PiArrowLeftBold
           className="return action_icon"
           onClick={() => {
             navigate(-1);
@@ -79,7 +80,17 @@ const SingleMovie = () => {
                 setexpandOverview((prev) => !prev);
               }}
             >
-              {expandOverview ? "Show Less" : "Show More"}
+              {expandOverview ? (
+                <>
+                  Collapse
+                  <FiChevronsUp />
+                </>
+              ) : (
+                <>
+                  Expand
+                  <FiChevronsDown />
+                </>
+              )}
             </div>
           </span>
 

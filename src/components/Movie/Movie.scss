@@ -27,7 +27,7 @@
     padding: 10px;
 
     .details {
-      .movie_info .info {
+      .movie_info .movie_genre {
         display: none;
       }
     }
@@ -138,6 +138,10 @@
       max-width: 180px;
       height: 250px;
       padding: 10px;
+
+      .details .movie_genre {
+        display: none;
+      }
     }
 
     &.long {
