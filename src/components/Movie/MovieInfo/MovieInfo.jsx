@@ -4,16 +4,20 @@ import { getGenreList } from "../../../Data/Data";
 import { TbStar } from "react-icons/tb";
 import { BiCollection } from "react-icons/bi";
 
-const MovieInfo = ({ data, mediaType }) => {
+const MovieInfo = ({ data, mediaType, showAll }) => {
   const [genreList, setGenreList] = useState([]);
 
   useEffect(() => {
-    if (data && mediaType) {
-      getGenreList(data.genre_ids || data.genres, mediaType).then((data) => {
-        setGenreList(data);
-      });
+    if (data) {
+      if (data.genres) {
+        setGenreList(data.genres);
+      } else {
+        getGenreList(data?.genre_ids, mediaType).then((data) => {
+          setGenreList(data);
+        });
+      }
     }
-  }, []);
+  }, [data, mediaType]);
 
   return (
     <div className="movie_info">
@@ -29,7 +33,13 @@ const MovieInfo = ({ data, mediaType }) => {
 
       <div className="info genre_list">
         <BiCollection className="icon" />
-        <span>{genreList[0]?.name || "Action & Adventure"}</span>
+        <span>
+          {showAll
+            ? genreList.map((g) => g.name).join(", ")
+            : genreList[0]?.name}
+        </span>
+
+        {/* <span>{genreList[0]?.name || "x"}</span> */}
       </div>
     </div>
   );

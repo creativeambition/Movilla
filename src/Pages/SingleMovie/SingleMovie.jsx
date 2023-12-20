@@ -90,7 +90,13 @@ const SingleMovie = () => {
             </div>
           </span>
 
-          <MovieInfo data={data.movieDetails} mediaType={params.mediaType} />
+          {}
+
+          <MovieInfo
+            data={data.movieDetails}
+            mediaType={params.mediaType}
+            showAll
+          />
           <CTAButtons />
         </div>
 
