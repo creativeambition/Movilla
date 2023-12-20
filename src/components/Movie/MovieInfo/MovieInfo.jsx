@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import "./MovieInfo.scss";
-import { AiOutlineStar } from "react-icons/ai";
-import { BiTimeFive } from "react-icons/bi";
 import { getGenreList } from "../../../Data/Data";
+import { TbStar } from "react-icons/tb";
+import { BiCollection } from "react-icons/bi";
 
 const MovieInfo = ({ data, mediaType }) => {
   const [genreList, setGenreList] = useState([]);
@@ -23,12 +23,12 @@ const MovieInfo = ({ data, mediaType }) => {
       </span>
 
       <div className="info rating">
-        <AiOutlineStar className="icon" />
+        <TbStar className="icon" />
         <span>{parseFloat(data?.vote_average).toPrecision(2) || "7.9"}</span>
       </div>
 
       <div className="info genre_list">
-        <BiTimeFive className="icon" />
+        <BiCollection className="icon" />
         <span>{genreList[0]?.name || "Action & Adventure"}</span>
       </div>
     </div>
