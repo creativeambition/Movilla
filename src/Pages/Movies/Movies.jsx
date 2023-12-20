@@ -5,13 +5,13 @@ import spiderman from "../../assets/movies/spiderman.jpg";
 import witcher from "../../assets/movies/witcher.png";
 import mario from "../../assets/movies/mario.png";
 import dune from "../../assets/movies/dune.png";
-import { BiMovie } from "react-icons/bi";
+import { MdOutlineMovie } from "react-icons/md";
 
 const Movies = () => {
   return (
     <div className="page movies_page">
       <div className="page_header">
-        <BiMovie />
+        <MdOutlineMovie />
         Movies
       </div>
 

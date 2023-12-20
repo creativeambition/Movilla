@@ -3,13 +3,13 @@ import dune from "../../assets/movies/dune.png";
 import avengers from "../../assets/movies/avengers.png";
 import mario from "../../assets/movies/mario.png";
 import witcher from "../../assets/movies/witcher.png";
-import { FiTv } from "react-icons/fi";
+import { PiTelevision } from "react-icons/pi";
 
 const TVShows = () => {
   return (
     <div className="page tv-shows">
       <div className="page_header">
-        <FiTv />
+        <PiTelevision />
         TV Shows
       </div>
 

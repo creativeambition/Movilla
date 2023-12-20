@@ -9,7 +9,7 @@ const MovieInfo = () => {
 
       <div className="info rating">
         <TbStar className="icon" />
-        <span>4.5</span>
+        <span>8.5</span>
       </div>
 
       <div className="info movie_genre">
