@@ -1,9 +1,28 @@
+import { useEffect, useState } from "react";
 import Movie from "../../components/Movie/Movie";
 import { MdOutlineMovie } from "react-icons/md";
 import { useRouteLoaderData } from "react-router-dom";
+import { fetchGenreMovies } from "../../Data/Data";
+import MovieSection from "../../components/MovieSection/MovieSection";
+import Loading from "../../components/Loading/Loading";
 
 const Movies = () => {
-  const { topRatedMovies, trendingMovies } = useRouteLoaderData("root");
+  const { topRatedMovies, trending, popularMovies } =
+    useRouteLoaderData("root");
+  const [movies, setMovies] = useState({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchGenreMovies("movie")
+      .then((data) => {
+        setLoading(false);
+        setMovies(data);
+      })
+      .catch((error) => {
+        setLoading(false);
+        console.error(error);
+      });
+  }, []);
 
   return (
     <div className="page movies_page">
@@ -12,387 +31,232 @@ const Movies = () => {
         Movies
       </div>
 
-      <section>
-        <div className="movies_wrapper">
-          {topRatedMovies.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="wide"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
+      {loading && <Loading />}
 
-      <section>
-        <header id="top_rated">
-          <span className="section_title">Top Rated</span>
-        </header>
+      <MovieSection>
+        {trending?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="wide"
+            link={`/${movie.media_type}/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {trendingMovies.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              type="medium"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Popular Movies">
+        {popularMovies?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section id="action">
-        <header>
-          <span className="section_title">Action</span>
-        </header>
+      <MovieSection sectionTitle="Top Rated Movies">
+        {topRatedMovies?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={avengers} type="long" link="/movie/id" />
-          <Movie movie_banner={spider} type="long" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="/movie/id" />
-          <Movie movie_banner={witcher} type="long" link="/movie/id" />
-          <Movie movie_banner={mario} type="long" link="/movie/id" />
-          <Movie movie_banner={dune} type="long" link="/movie/id" />
-          <Movie movie_banner={avengers} type="long" link="/movie/id" />
-          <Movie movie_banner={spider} type="long" link="/movie/id" />
-          <Movie movie_banner={spiderman} type="long" link="/movie/id" />
-          <Movie movie_banner={witcher} type="long" link="/movie/id" />
-          <Movie movie_banner={mario} type="long" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection
+        sectionTitle="Movies > Adventure"
+        link="/movie/all/adventure"
+      >
+        {movies.Adventure?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header id="adventure">
-          <span className="section_title">Adventure</span>
-        </header>
+      <MovieSection sectionTitle="Movies > Action" link="/movie/all/action">
+        {movies.Action?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={avengers} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={mario} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={avengers} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={mario} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection
+        sectionTitle="Movies > Animation"
+        link="/movie/all/animation"
+      >
+        {movies.Animation?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="small"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header id="animation">
-          <span className="section_title">Animation</span>
-        </header>
+      <MovieSection sectionTitle="Movies > Comedy" link="/movie/all/comedy">
+        {movies.Comedy?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={avengers} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={mario} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={avengers} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={mario} type="medium" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Movies > Crime" link="/movie/all/crime">
+        {movies.Crime?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header id="comedy">
-          <span className="section_title">Comedy</span>
-        </header>
+      <MovieSection sectionTitle="Movies > Horror" link="/movie/all/horror">
+        {movies.Horror?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="small"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Movies > Family" link="/movie/all/family">
+        {movies.Family?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="wide"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header id="crime">
-          <span className="section_title">Crime</span>
-        </header>
+      <MovieSection sectionTitle="Movies > Fantasy" link="/movie/all/fantasy">
+        {movies.Fantasy?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Movies > Music" link="/movie/all/music">
+        {movies.Music?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="small"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Documentary</span>
-        </header>
+      <MovieSection sectionTitle="Movies > Mystery" link="/movie/all/mystery">
+        {movies.Mystery?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Movies > Drama" link="/movie/all/drama">
+        {movies.Drama?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="small"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Horror</span>
-        </header>
+      <MovieSection
+        sectionTitle="Movies > Science Fiction"
+        link="/movie/all/science fiction"
+      >
+        {movies["Science Fiction"]?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="medium" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Movies > War" link="/movie/all/war">
+        {movies.War?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Family</span>
-        </header>
+      <MovieSection sectionTitle="Movies > Thriller" link="/movie/all/thriller">
+        {movies.Thriller?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Fantasy</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="long" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Music</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Mystery</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Science Fiction</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>{/* <span className="section_title">TV Movie</span> */}</header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="wide" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Drama</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">War</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Thriller</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-          {/* <Movie movie_banner={dune} type="small" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">New Releases</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={mario} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={mario} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="wide" link="/movie/id" /> */}
-          {/* <Movie movie_banner={avengers} type="wide" link="/movie/id" /> */}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Upcoming</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {/* <Movie movie_banner={mario} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={avengers} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={mario} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spider} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={witcher} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={spiderman} type="medium" link="/movie/id" /> */}
-          {/* <Movie movie_banner={avengers} type="medium" link="/movie/id" /> */}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Movies > TV Movie" link="/movie/all/tv movie">
+        {movies["TV Movie"]?.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="wide"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
     </div>
   );
 };

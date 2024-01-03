@@ -3,7 +3,7 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { SharedContext } from "../../../SharedContext";
 
-const Nav = ({ Icon, title, active, link, index }) => {
+const Nav = ({ Icon, title, link, index }) => {
   const { NavActive, setNavActive } = useContext(SharedContext);
 
   useEffect(() => {
@@ -48,11 +48,7 @@ const Nav = ({ Icon, title, active, link, index }) => {
   }
 
   return (
-    <Link
-      to={link}
-      className={`nav_icon ${active && "active"}`}
-      onClick={handleIndicator}
-    >
+    <Link to={link} className="nav_icon" onClick={handleIndicator}>
       <Icon className="icon" />
       <span className="nav_title">{title}</span>
     </Link>

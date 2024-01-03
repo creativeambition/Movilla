@@ -37,7 +37,7 @@ const Navigation = () => {
 
         <Nav Icon={RiHome5Line} title="Home" link="/" index={0} />
         <Nav Icon={MdOutlineMovie} title="Movies" link="movies" index={1} />
-        <Nav Icon={PiTelevision} title="TV Shows" link="tv-shows" index={2} />
+        <Nav Icon={PiTelevision} title="TV Shows" link="tv" index={2} />
         <Nav Icon={FiStar} title="Favorites" link="favorites" index={3} />
         <Nav Icon={BiLibrary} title="Library" link="library" index={4} />
       </div>

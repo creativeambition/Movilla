@@ -14,14 +14,16 @@ import {
   MovieDetails,
   MovieImages,
   NowPlaying,
-  PopularMovies,
-  PopularShows,
+  Popular,
   SimilarMovies,
-  TopRatedMovies,
-  TopRatedShows,
-  TrendingMovies,
-  UpcomingMovies,
+  TopRated,
+  Trending,
+  Upcoming,
+  WatchTrailer,
+  fetchGenres,
+  fetchSingleGenreMovies,
 } from "./Data/Data";
+import GenreMovies from "./Pages/GenreMovies/GenreMovies";
 
 async function DataLoader() {
   try {
@@ -29,55 +31,79 @@ async function DataLoader() {
       popularMovies,
       topRatedMovies,
       nowPlaying,
-      trendingMovies,
-      upcomingMovies,
+      trending,
+      upcoming,
       popularShows,
       topRatedShows,
       airingToday,
     ] = await Promise.all([
-      PopularMovies(),
-      TopRatedMovies(),
+      Popular("movie"),
+      TopRated("movie"),
       NowPlaying(),
-      TrendingMovies(),
-      UpcomingMovies(),
-      PopularShows(),
-      TopRatedShows(),
+      Trending(),
+      Upcoming(),
+      Popular("tv"),
+      TopRated("tv"),
       AiringToday(),
-    ])
-      .then((responses) => responses.map((response) => response.results))
-      .catch((err) => {
-        console.error("Error fetching data", err);
-      });
+    ]);
 
     return {
       popularMovies,
       topRatedMovies,
       nowPlaying,
-      trendingMovies,
-      upcomingMovies,
+      trending,
+      upcoming,
       popularShows,
       topRatedShows,
       airingToday,
     };
   } catch {
-    console.error("Unable to fetch data");
+    return null;
   }
 }
 
 async function SingleMovieLoader({ params }) {
-  const [movieDetails, movieImages, similarMovies, cast] = await Promise.all([
-    MovieDetails(params.mediaType, params.id),
-    MovieImages(params.mediaType, params.id),
-    SimilarMovies(params.mediaType, params.id),
-    MovieCredits(params.mediaType, params.id),
-  ]);
+  try {
+    const [movieDetails, movieImages, similarMovies, cast] = await Promise.all([
+      MovieDetails(params.mediaType, params.id),
+      MovieImages(params.mediaType, params.id),
+      SimilarMovies(params.mediaType, params.id),
+      MovieCredits(params.mediaType, params.id),
+    ]);
 
-  return {
-    movieDetails,
-    movieImages,
-    similarMovies,
-    cast,
-  };
+    return {
+      movieDetails,
+      movieImages,
+      similarMovies,
+      cast,
+    };
+  } catch {
+    return null;
+  }
+}
+
+async function SingleGenreMoviesLoader({ params }) {
+  try {
+    let genres = await fetchGenres(params.mediaType);
+
+    let genre = genres.find(
+      (genre) => genre.name.toLowerCase() == params.genre.toLowerCase()
+    );
+
+    const genreId = genre.id;
+
+    return await fetchSingleGenreMovies(genreId, params.mediaType);
+  } catch {
+    return null;
+  }
+}
+
+async function WatchPageLoader({ params }) {
+  try {
+    return WatchTrailer(params.mediaType, params.id);
+  } catch (error) {
+    return error;
+  }
 }
 
 export const router = createBrowserRouter([
@@ -98,7 +124,7 @@ export const router = createBrowserRouter([
         element: <Movies />,
       },
       {
-        path: "tv-shows",
+        path: "tv",
         element: <TVShows />,
       },
       {
@@ -115,8 +141,14 @@ export const router = createBrowserRouter([
         element: <SingleMovie />,
       },
       {
-        path: "watch/:id",
+        path: "/:mediaType/all/:genre",
+        element: <GenreMovies />,
+        loader: SingleGenreMoviesLoader,
+      },
+      {
+        path: "/watch/:mediaType/:title/:id",
         element: <WatchPage />,
+        loader: WatchPageLoader,
       },
     ],
   },

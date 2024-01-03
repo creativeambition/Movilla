@@ -1,16 +1,14 @@
-import { Link, useRouteError } from "react-router-dom";
 import "./ErrorPage.scss";
+import { Link } from "react-router-dom";
+import err_404 from "../../assets/others/err_404.svg";
 
 const ErrorPage = () => {
-  const error = useRouteError();
-
-  console.log("Hello from error element ->", error);
-
   return (
     <div className="error-page">
-      <h3>An error occurred</h3>
+      <img src={err_404} alt="" />
 
-      <p>No such page found</p>
+      <h3>An error occurred</h3>
+      <p>Check your connection and try again</p>
 
       <Link to="/">
         <button>Return</button>

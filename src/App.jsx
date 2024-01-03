@@ -11,6 +11,7 @@ import ResetScrollPosition from "./components/ResetScrollPosition/ResetScrollPos
 const MobileProfile = lazy(() =>
   import("./components/MobileProfile/MobileProfile")
 );
+import Loading from "./components/Loading/Loading";
 
 const MobileNavigation = lazy(() =>
   import("./components/MobileNavigation/MobileNavigation")
@@ -25,27 +26,27 @@ function App() {
 
   const navigation = useNavigation();
 
+  function checkWindow() {
+    if (window.innerWidth <= 600) {
+      setmobileView(true);
+    } else {
+      setmobileView(false);
+    }
+  }
+
+  window.addEventListener("resize", () => {
+    checkWindow();
+  });
+
   useEffect(() => {
+    checkWindow();
+
     const themes = document.querySelectorAll(".theme_colors .theme");
 
     themes.forEach((it) => {
       it.addEventListener("click", () => {
         settheme(it.getAttribute("data-theme"));
       });
-    });
-
-    function checkWindow() {
-      if (window.innerWidth <= 600) {
-        setmobileView(true);
-      } else {
-        setmobileView(false);
-      }
-    }
-
-    checkWindow();
-
-    window.addEventListener("resize", () => {
-      checkWindow();
     });
   }, []);
 
@@ -89,6 +90,8 @@ function App() {
         ) : (
           <Navigation />
         )}
+
+        {navigation.state == "loading" && <Loading />}
 
         <main>
           <div className="blinds" onClick={toggle}></div>

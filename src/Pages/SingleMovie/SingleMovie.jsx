@@ -19,6 +19,12 @@ const SingleMovie = () => {
   const data = useLoaderData();
   const params = useParams();
 
+  const title =
+    data.movieDetails.title ||
+    data.movieDetails.original_title ||
+    data.movieDetails.name ||
+    data.movieDetails.original_name;
+
   return (
     <div className="single_movie_page">
       <div className="movie_banner">
@@ -36,12 +42,7 @@ const SingleMovie = () => {
           }}
         />
 
-        <h2 className="movie_title">
-          {data.movieDetails.title ||
-            data.movieDetails.original_title ||
-            data.movieDetails.name ||
-            data.movieDetails.original_name}
-        </h2>
+        <h2 className="movie_title">{title}</h2>
 
         <div className="tools">
           <BiStar className="action_icon" />
@@ -52,16 +53,14 @@ const SingleMovie = () => {
       </header>
 
       <div className="slide_container">
-        {data.movieImages.backdrops.map((img) => {
-          return (
-            <div className="slide" key={img.file_path}>
-              <img
-                src={`https://image.tmdb.org/t/p/original${img.file_path}`}
-                alt=""
-              />
-            </div>
-          );
-        })}
+        {data.movieImages.backdrops.map((img) => (
+          <div className="slide" key={img.file_path}>
+            <img
+              src={`https://image.tmdb.org/t/p/original${img.file_path}`}
+              alt=""
+            />
+          </div>
+        ))}
       </div>
 
       <div className="details_section">
@@ -90,14 +89,9 @@ const SingleMovie = () => {
             </div>
           </span>
 
-          {}
+          <MovieInfo data={data.movieDetails} mediaType={params.mediaType} />
 
-          <MovieInfo
-            data={data.movieDetails}
-            mediaType={params.mediaType}
-            showAll
-          />
-          <CTAButtons />
+          <CTAButtons mediaType={params.mediaType} movie={data.movieDetails} />
         </div>
 
         <div className="cast_section">

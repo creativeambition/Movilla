@@ -8,14 +8,21 @@
   color: #ffffff;
   font-family: poppins;
 
+  img {
+    width: min(700px, 100%);
+  }
+
   h3 {
     font-size: 40px;
     font-weight: normal;
     font-family: "Recoleta DEMO";
+    text-align: center;
   }
 
   p {
-    opacity: 0.6;
+    color: var(--text-color-alt);
+    text-align: center;
+    max-width: min(700px, 90%);
   }
 
   button {

@@ -1,176 +1,236 @@
+import axios from "axios";
 import { axiosInstance } from "./axios";
+import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import { db } from "../firebase";
 
 const apiKey = "6092a82e2b44efc996cd82a308128338";
 
 // Movies
-export async function PopularMovies() {
-  try {
+
+export async function Popular(mediaType) {
+  if (mediaType == "movie" || "tv") {
     const response = await axiosInstance.get(
-      `/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+      `/${mediaType}/popular?api_key=${apiKey}&language=en-US&page=1`
     );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
+    return response.data.results;
+  } else {
+    console.log("Invalid media type, supported media types are tv or movie");
   }
 }
 
-export async function TopRatedMovies() {
-  try {
+export async function TopRated(mediaType) {
+  if (mediaType == "movie" || "tv") {
     const response = await axiosInstance.get(
-      `/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`
+      `/${mediaType}/top_rated?api_key=${apiKey}&language=en-US&page=1`
     );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
+    return response.data.results;
+  } else {
+    console.log("Invalid media type, supported media types are tv or movie");
   }
 }
 
 export async function NowPlaying() {
-  try {
-    const response = await axiosInstance.get(
-      `/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
-    );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
-  }
+  const response = await axiosInstance.get(
+    `/movie/now_playing?api_key=${apiKey}&language=en-US&page=1`
+  );
+  return response.data.results;
 }
 
-export async function TrendingMovies() {
-  try {
-    const response = await axiosInstance.get(
-      `/trending/all/week?api_key=${apiKey}&language=en-US&page=1`
-    );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
-  }
+export async function Trending() {
+  const response = await axiosInstance.get(
+    `/trending/all/week?api_key=${apiKey}&language=en-US&page=1`
+  );
+  return response.data.results;
 }
 
-export async function UpcomingMovies() {
-  try {
-    const response = await axiosInstance.get(
-      `/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
-    );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
-  }
+export async function Upcoming() {
+  const response = await axiosInstance.get(
+    `/movie/upcoming?api_key=${apiKey}&language=en-US&page=1`
+  );
+  return response.data.results;
 }
 
 // TV Shows
-export async function PopularShows() {
-  try {
-    const response = await axiosInstance.get(
-      `/tv/popular?api_key=${apiKey}&language=en-US&page=1`
-    );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
-  }
-}
-
-export async function TopRatedShows() {
-  try {
-    const response = await axiosInstance.get(
-      `/tv/top_rated?api_key=${apiKey}&language=en-US&page=1`
-    );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
-  }
-}
 
 export async function AiringToday() {
-  try {
-    const response = await axiosInstance.get(
-      `/tv/airing_today?api_key=${apiKey}&language=en-US&page=1`
-    );
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred =>", error);
-  }
+  const response = await axiosInstance.get(
+    `/tv/airing_today?api_key=${apiKey}&language=en-US&page=1`
+  );
+  return response.data.results;
 }
 
-// Others
-export async function getGenreList(ids, mediaType) {
-  try {
+// Fetch Movie or Tv Genres
+
+export async function fetchGenres(mediaType) {
+  if (mediaType == "movie" || "tv") {
     const response = await axiosInstance.get(
       `/genre/${mediaType}/list?api_key=${apiKey}`
     );
+    return response.data.genres;
+  } else {
+    console.log("Invalid media type. Supported media types are: movie or tv");
+    return;
+  }
+}
 
-    let genres = response.data.genres;
-    let list = [];
+// Fetch all movies for a particular genre
 
-    for (let i = 0; i < genres.length; i++) {
-      if (ids.includes(genres[i].id)) {
-        list.push(genres[i]);
-      }
+export async function fetchSingleGenreMovies(genreId, mediaType) {
+  const source = axios.CancelToken.source();
+
+  try {
+    let allResults = [];
+
+    for (let i = 1; i <= 3; i++) {
+      const response = await axiosInstance.get(
+        `/discover/${mediaType}?api_key=${apiKey}&with_genres=${genreId}&page=${i}`,
+        { cancelToken: source.token }
+      );
+      allResults = allResults.concat(response.data.results);
     }
 
-    return list;
+    return allResults;
   } catch (error) {
-    console.log("Error getting genre list", error);
+    if (axios.isCancel(error)) {
+      console.log("Operation aborted");
+    } else {
+      source.cancel();
+      console.log(`Unable to fetch ${mediaType}/${genreId} movies =>`, error);
+    }
+    return;
   }
+}
+
+// Fetch all movies or tv for all genres (movie / tv)
+
+export async function fetchGenreMovies(mediaType) {
+  let genres = await fetchGenres(mediaType);
+
+  let data = {};
+  const source = axios.CancelToken.source();
+
+  for (const element of genres) {
+    const response = await axiosInstance.get(
+      `/discover/${mediaType}?api_key=${apiKey}&with_genres=${element.id}&page=1`,
+      {
+        cancelToken: source.token,
+      }
+    );
+    data[element.name] = response.data.results;
+  }
+
+  return data;
+}
+
+// Others
+// Fetching a movie's genre
+export async function getGenreList(ids, mediaType) {
+  let genres = await fetchGenres(mediaType);
+  let list = [];
+
+  for (let i = 0; i < genres.length; i++) {
+    if (ids.includes(genres[i].id)) {
+      list.push(genres[i]);
+    }
+  }
+
+  return list;
 }
 
 // Single Movie Page
 export async function MovieDetails(mediaType, id) {
-  try {
-    const response = await axiosInstance.get(
-      `/${mediaType}/${id}?api_key=${apiKey}`
-    );
+  const response = await axiosInstance.get(
+    `/${mediaType}/${id}?api_key=${apiKey}`
+  );
 
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred => while fetching movie details", error);
-  }
+  return response.data;
 }
 
 export async function MovieImages(mediaType, id) {
-  try {
-    const response = await axiosInstance.get(
-      `/${mediaType}/${id}/images?api_key=${apiKey}`
-    );
+  const response = await axiosInstance.get(
+    `/${mediaType}/${id}/images?api_key=${apiKey}`
+  );
 
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred => while fetching movie details", error);
-  }
-}
-
-export async function MovieVideos(mediaType, id) {
-  try {
-    const response = await axiosInstance.get(
-      `/${mediaType}/${id}/videos?api_key=${apiKey}`
-    );
-
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred => while fetching movie details", error);
-  }
+  return response.data;
 }
 
 export async function SimilarMovies(mediaType, id) {
-  try {
-    const response = await axiosInstance.get(
-      `/${mediaType}/${id}/similar?api_key=${apiKey}`
-    );
+  const response = await axiosInstance.get(
+    `/${mediaType}/${id}/similar?api_key=${apiKey}`
+  );
 
-    return response.data.results;
-  } catch (error) {
-    console.log("An error occurred => while fetching movie details", error);
-  }
+  return response.data.results;
 }
 
 export async function MovieCredits(mediaType, id) {
-  try {
-    const response = await axiosInstance.get(
-      `/${mediaType}/${id}/credits?api_key=${apiKey}`
-    );
+  const response = await axiosInstance.get(
+    `/${mediaType}/${id}/credits?api_key=${apiKey}`
+  );
 
-    return response.data;
-  } catch (error) {
-    console.log("An error occurred => while fetching movie details", error);
+  return response.data;
+}
+
+// Watch page
+
+export async function WatchTrailer(mediaType, id) {
+  const response = await axiosInstance.get(
+    `/${mediaType}/${id}/videos?api_key=${apiKey}`
+  );
+
+  return response.data.results.find((data) => data.official);
+}
+
+// Search Results
+
+export async function Search(queryString) {
+  const response = await axiosInstance.get(
+    `/search/movie?query=${queryString}&api_key=${apiKey}`
+  );
+
+  return response.data.results.slice(0, 5);
+}
+
+// Add movie to favorites
+export async function AddToFavorites(movie, mediaType) {
+  const id = `${mediaType}-${movie.id}`;
+
+  movie.media_type = movie.media_type || mediaType;
+  try {
+    const docRef = doc(db, "favorites", id);
+    return await setDoc(docRef, movie);
+  } catch (err) {
+    console.log("An error occurred while connecting", err);
   }
+}
+
+// Fetch favorites
+export async function fetchFavorites() {
+  const data = await getDocs(collection(db, "favorites"));
+  const fav = [];
+  data.forEach((doc) => {
+    fav.push(doc.data());
+  });
+  return fav;
+}
+
+// Bookmark movie
+export async function AddToBookmarks(movie) {
+  const id = `${movie.id}`;
+
+  try {
+    const docRef = doc(db, "bookmarks", id);
+    return await setDoc(docRef, movie);
+  } catch (err) {
+    console.log("An error occurred while connecting", err);
+  }
+}
+
+// Fetch bookmarks
+export async function fetchBookmarks() {
+  const data = await getDocs(collection(db, "bookmarks"));
+  const fav = [];
+  data.forEach((doc) => {
+    fav.push(doc.data());
+  });
+  return fav;
 }

@@ -8,7 +8,9 @@ import { RiMenu4Fill } from "react-icons/ri";
 import { BiChevronLeft, BiSearchAlt } from "react-icons/bi";
 
 import spiderman_banner from "../../assets/movies/spider.jpg";
-import { Link } from "react-router-dom";
+import { Form, Link } from "react-router-dom";
+import Loading from "../Loading/Loading";
+import { Search } from "../../Data/Data";
 const ResMovie = lazy(() => import("../SearchResMovie/ResMovie"));
 
 const Header = () => {
@@ -16,6 +18,8 @@ const Header = () => {
     useContext(SharedContext);
   const [ActivateSearch, setActivateSearch] = useState(false);
   const [SearchValue, setSearchValue] = useState("");
+
+  const [searchResult, setSearchResult] = useState([]);
 
   useEffect(() => {
     const header = document.querySelector(".app_header");
@@ -43,9 +47,18 @@ const Header = () => {
     }
   }, [NavActive]);
 
-  function handleMovieClick() {
-    setActivateSearch(false);
+  function handleSubmit() {
+    if (SearchValue) {
+      Search(SearchValue).then((data) => {
+        setSearchResult(data);
+      });
+    }
+  }
+
+  function handleClick() {
     setSearchValue("");
+    setActivateSearch(false);
+    setSearchResult([]);
   }
 
   return (
@@ -69,16 +82,18 @@ const Header = () => {
 
       <>
         <div className={`search field ${ActivateSearch && "active"}`}>
-          <input
-            type="text"
-            name="search"
-            placeholder="Search..."
-            value={SearchValue}
-            disabled={!ActivateSearch}
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-            }}
-          />
+          <Form className="form" onSubmit={handleSubmit}>
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              value={SearchValue}
+              disabled={!ActivateSearch}
+              onChange={(e) => {
+                setSearchValue(e.target.value);
+              }}
+            />
+          </Form>
 
           <button
             className="search_icon"
@@ -94,27 +109,16 @@ const Header = () => {
             )}
           </button>
         </div>
+
         {SearchValue && (
           <div className="search_res">
-            <span>search results for "{SearchValue}"</span>
+            <span>search results for `{SearchValue}`</span>
 
             <div className="res_movies_wrapper">
-              <Suspense fallback="Loading...">
-                <ResMovie
-                  banner={spiderman_banner}
-                  title="Spaderman: Into the spader-verse"
-                  handleClick={handleMovieClick}
-                />
-                <ResMovie
-                  banner={spiderman_banner}
-                  title="Spaderman: Into the spader-verse"
-                  handleClick={handleMovieClick}
-                />
-                <ResMovie
-                  banner={spiderman_banner}
-                  title="Spaderman: Into the spader-verse"
-                  handleClick={handleMovieClick}
-                />
+              <Suspense fallback={<Loading />}>
+                {searchResult?.map((res) => (
+                  <ResMovie key={res.id} content={res} onclick={handleClick} />
+                ))}
               </Suspense>
             </div>
           </div>

@@ -1,4 +1,5 @@
 import Featured from "../../components/Featured/Featured";
+import MovieSection from "../../components/MovieSection/MovieSection";
 import Movie from "../../components/Movie/Movie";
 
 import dune from "../../assets/movies/dune.png";
@@ -15,208 +16,200 @@ import fantasy from "../../assets/genre/fantasy.png";
 import crime from "../../assets/genre/crime.png";
 
 import { useRouteLoaderData } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchBookmarks, fetchFavorites } from "../../Data/Data";
 
 const Home = () => {
+  const [favorites, setFavorites] = useState([]);
+  const [bookmarks, setBookmarks] = useState([]);
+
   const data = useRouteLoaderData("root");
+
+  useEffect(() => {
+    fetchFavorites()
+      .then((data) => setFavorites(data))
+      .catch((err) => {
+        console.log("An error occurred while fetching favorites", err);
+        alert("Unable to fetch favorites");
+      });
+
+    fetchBookmarks()
+      .then((data) => setBookmarks(data))
+      .catch((err) => {
+        console.log("An error occurred while fetching favorites", err);
+        alert("Unable to fetch favorites");
+      });
+  }, []);
 
   return (
     <>
       <Featured />
 
-      <section>
-        <header>
-          <span className="section_title">Popular Movies</span>
-        </header>
+      <MovieSection sectionTitle="Popular Movies" link="/movies">
+        {data.popularMovies.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {data.popularMovies.map((movie) => (
+      <MovieSection sectionTitle="Genres">
+        <Genre link={"/movie/all/action"} banner={action} category="Action" />
+        <Genre
+          link={"/movie/all/Animation"}
+          banner={animated}
+          category="Animation"
+        />
+        <Genre
+          link={"/movie/all/Adventure"}
+          banner={adventure}
+          category="Adventure"
+        />
+        <Genre link={"/movie/all/Comedy"} banner={comedy} category="Comedy" />
+        <Genre
+          link={"/movie/all/Science Fiction"}
+          banner={scifi}
+          category="Science Fiction"
+        />
+        <Genre link={"/movie/all/War"} banner={war} category="War" />
+        <Genre
+          link={"/movie/all/Fantasy"}
+          banner={fantasy}
+          category="Fantasy"
+        />
+        <Genre link={"/movie/all/Crime"} banner={crime} category="Crime" />
+        <Genre link={"/movie/all/Drama"} banner={dune} category="Drama" />
+        <Genre link={"/movie/all/Family"} banner={dune} category="Family" />
+        <Genre link={"/movie/all/Horror"} banner={dune} category="Horror" />
+        <Genre link={"/movie/all/Music"} banner={dune} category="Music" />
+        <Genre link={"/movie/all/Mystery"} banner={dune} category="Mystery" />
+        <Genre link={"/movie/all/TV Movie"} banner={dune} category="TV Movie" />
+        <Genre link={"/movie/all/Thriller"} banner={dune} category="Thriller" />
+      </MovieSection>
+
+      <MovieSection sectionTitle="My Favorites Collection" link="/favorites">
+        {favorites.length > 0 ? (
+          favorites.map((movie) => (
             <Movie
               key={movie.id}
               movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
               type="medium"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              link={`/${movie.media_type}/${movie.id}`}
               content={movie}
             />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Favorites</span>
-        </header>
-
-        <div className="movies_wrapper">
+          ))
+        ) : (
           <div className="fav_wrapper">
             <img src={fav} alt="" className="fav_gif" />
           </div>
-        </div>
-      </section>
+        )}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Genres</span>
-        </header>
+      <MovieSection sectionTitle="Top Rated Movies">
+        {data.topRatedMovies.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          <Genre link={"/movies"} banner={action} category="Action" />
-          <Genre link={"/movies"} banner={animated} category="Animation" />
-          <Genre link={"/movies"} banner={adventure} category="Adventure" />
-          <Genre link={"/movies"} banner={comedy} category="Comedy" />
-          <Genre link={"/movies"} banner={scifi} category="Science Fiction" />
-          <Genre link={"/movies"} banner={war} category="War" />
-          <Genre link={"/movies"} banner={fantasy} category="Fantasy" />
-          <Genre link={"/movies"} banner={crime} category="Crime" />
-          <Genre link={"/movies"} banner={dune} category="Drama" />
-          <Genre link={"/movies"} banner={dune} category="Family" />
-          <Genre link={"/movies"} banner={dune} category="Horror" />
-          <Genre link={"/movies"} banner={dune} category="Music" />
-          <Genre link={"/movies"} banner={dune} category="Mystery" />
-          <Genre link={"/movies"} banner={dune} category="TV Movie" />
-          <Genre link={"/movies"} banner={dune} category="Thriller" />
-          <Genre link={"/movies"} banner={dune} category="Documentary" />
-        </div>
-      </section>
+      <MovieSection sectionTitle="Now Playing">
+        {data.nowPlaying.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="wide"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Top Rated Movies</span>
-        </header>
+      <MovieSection sectionTitle="Trending Movies" link="/movies">
+        {data.trending.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/${movie.media_type}/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {data.topRatedMovies.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="long"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Upcoming Movies" link="/movies">
+        {data.upcoming.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/movie/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Now Playing</span>
-
-          <div className="live"></div>
-        </header>
-
-        <div className="movies_wrapper">
-          {data.nowPlaying.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="wide"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Trending Movies</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {data.trendingMovies.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="long"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Upcoming Movies</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {data.upcomingMovies.map((movie) => (
+      <MovieSection sectionTitle="My Bookmarks Collection" link="/library">
+        {bookmarks.length > 0 ? (
+          bookmarks.map((movie) => (
             <Movie
               key={movie.id}
               movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
               type="medium"
-              link={`/${movie.media_type || "movie"}/${movie.id}`}
+              link={`/${movie.media_type}/${movie.id}`}
               content={movie}
             />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Bookmarks</span>
-        </header>
-
-        <div className="movies_wrapper">
+          ))
+        ) : (
           <div className="fav_wrapper">
             <img src={fav} alt="" className="fav_gif" />
           </div>
-        </div>
-      </section>
+        )}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Popular TV Shows</span>
-        </header>
+      <MovieSection sectionTitle="Popular TV Shows" link="/tv">
+        {data.popularShows.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="long"
+            link={`/tv/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-        <div className="movies_wrapper">
-          {data.popularShows.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="long"
-              link={`/tv/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Top Rated Shows" link="/tv">
+        {data.topRatedShows.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
+            type="medium"
+            link={`/tv/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
 
-      <section>
-        <header>
-          <span className="section_title">Top Rated Shows</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {data.topRatedShows.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
-              type="medium"
-              link={`/tv/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
-
-      <section>
-        <header>
-          <span className="section_title">Airing-Today TV Shows</span>
-        </header>
-
-        <div className="movies_wrapper">
-          {data.airingToday.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
-              type="wide"
-              link={`/tv/${movie.id}`}
-              content={movie}
-            />
-          ))}
-        </div>
-      </section>
+      <MovieSection sectionTitle="Airing-Today TV Shows" link="/tv">
+        {data.airingToday.map((movie) => (
+          <Movie
+            key={movie.id}
+            movie_banner={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
+            type="wide"
+            link={`/tv/${movie.id}`}
+            content={movie}
+          />
+        ))}
+      </MovieSection>
     </>
   );
 };

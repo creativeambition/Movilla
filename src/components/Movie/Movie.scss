@@ -22,8 +22,8 @@
   }
 
   &.small {
-    min-width: 150px;
-    max-width: 150px;
+    min-width: 160px;
+    max-width: 160px;
     height: 220px;
     padding: 10px;
 
@@ -141,6 +141,17 @@
 
 @media (max-width: 600px) {
   .movie {
+    &.small {
+      min-width: max(100px, 31%);
+      max-width: max(100px, 31%);
+      height: 180px;
+      padding: 5px;
+
+      .title {
+        font-size: 14px !important;
+      }
+    }
+
     &.medium {
       min-width: 180px;
       max-width: 180px;
@@ -164,7 +175,7 @@
       height: 250px;
 
       .title {
-        font-size: 25px !important;
+        font-size: 20px !important;
       }
 
       .desc {

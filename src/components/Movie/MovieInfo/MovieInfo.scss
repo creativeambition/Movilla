@@ -6,7 +6,6 @@
   color: var(--text-color);
   width: 100%;
   white-space: nowrap;
-  overflow: auto;
 
   span {
     color: var(--text-color-alt);
@@ -17,9 +16,23 @@
     display: flex;
     gap: 5px;
     align-items: center;
+    overflow: auto;
+
+    &.rating {
+      min-width: fit-content;
+    }
+
+    &.genre_list {
+      margin-left: auto;
+    }
 
     .icon {
       min-width: 20px;
+    }
+
+    span {
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 }

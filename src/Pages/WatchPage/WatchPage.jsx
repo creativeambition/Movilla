@@ -1,10 +1,20 @@
 import "./WatchPage.scss";
-import raya from "../../assets/raya.mp4";
 import { FaChevronLeft } from "react-icons/fa";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useLoaderData, useNavigate, useParams } from "react-router-dom";
+import YouTube from "react-youtube";
 
 const WatchPage = () => {
   const navigate = useNavigate();
+  const data = useLoaderData();
+  const { title } = useParams();
+
+  const opts = {
+    height: "100%",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
 
   return (
     <div className="page watch">
@@ -16,14 +26,11 @@ const WatchPage = () => {
           }}
         />
 
-        <h3>
-          <span>Now Playing: </span>
-          Raya And The Last Dragon
-        </h3>
+        <h3>{title}</h3>
       </header>
 
       <div className="video-container">
-        <video autoPlay controls src={raya}></video>
+        <YouTube className="yt" videoId={data.key} opts={opts} loading="lazy" />
       </div>
     </div>
   );

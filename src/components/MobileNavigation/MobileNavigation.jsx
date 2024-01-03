@@ -1,7 +1,8 @@
 import "./MobileNavigation.scss";
 import { RiHome5Line } from "react-icons/ri";
-import { FiTv } from "react-icons/fi";
-import { BiLibrary, BiMovie } from "react-icons/bi";
+import { MdOutlineMovie } from "react-icons/md";
+import { PiTelevision } from "react-icons/pi";
+import { BiLibrary } from "react-icons/bi";
 import MobileNavIcon from "./MobileNavIcon/MobileNavIcon";
 import { useContext } from "react";
 import { SharedContext } from "../../SharedContext";
@@ -17,8 +18,18 @@ const MobileNavigation = () => {
         <div className="indicator"></div>
 
         <MobileNavIcon Icon={RiHome5Line} title="Home" link="/" index={0} />
-        <MobileNavIcon Icon={BiMovie} title="Movies" link="movies" index={1} />
-        <MobileNavIcon Icon={FiTv} title="TV Shows" link="tv-shows" index={2} />
+        <MobileNavIcon
+          Icon={MdOutlineMovie}
+          title="Movies"
+          link="movies"
+          index={1}
+        />
+        <MobileNavIcon
+          Icon={PiTelevision}
+          title="TV Shows"
+          link="tv"
+          index={2}
+        />
         <MobileNavIcon
           Icon={BiLibrary}
           title="Library"
