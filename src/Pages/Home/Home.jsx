@@ -14,6 +14,13 @@ import scifi from "../../assets/genre/sci-fi.png";
 import war from "../../assets/genre/war.png";
 import fantasy from "../../assets/genre/fantasy.png";
 import crime from "../../assets/genre/crime.png";
+import drama from "../../assets/genre/drama.jpg";
+import family from "../../assets/genre/family.jpg";
+import horror from "../../assets/genre/horror.jpg";
+import music from "../../assets/genre/music.jpg";
+import mystery from "../../assets/genre/mystery.jpg";
+import tvmovie from "../../assets/genre/tvmovie.jpg";
+import thriller from "../../assets/genre/thriller.jpg";
 
 import { useRouteLoaderData } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -82,16 +89,16 @@ const Home = () => {
           category="Fantasy"
         />
         <Genre link={"/movie/all/Crime"} banner={crime} category="Crime" />
-        <Genre link={"/movie/all/Drama"} banner={dune} category="Drama" />
-        <Genre link={"/movie/all/Family"} banner={dune} category="Family" />
-        <Genre link={"/movie/all/Horror"} banner={dune} category="Horror" />
-        <Genre link={"/movie/all/Music"} banner={dune} category="Music" />
-        <Genre link={"/movie/all/Mystery"} banner={dune} category="Mystery" />
-        <Genre link={"/movie/all/TV Movie"} banner={dune} category="TV Movie" />
-        <Genre link={"/movie/all/Thriller"} banner={dune} category="Thriller" />
+        <Genre link={"/movie/all/Drama"} banner={drama} category="Drama" />
+        <Genre link={"/movie/all/Family"} banner={family} category="Family" />
+        <Genre link={"/movie/all/Horror"} banner={horror} category="Horror" />
+        <Genre link={"/movie/all/Music"} banner={music} category="Music" />
+        <Genre link={"/movie/all/Mystery"} banner={mystery} category="Mystery" />
+        <Genre link={"/movie/all/TV Movie"} banner={tvmovie} category="TV Movie" />
+        <Genre link={"/movie/all/Thriller"} banner={thriller} category="Thriller" />
       </MovieSection>
 
-      <MovieSection sectionTitle="My Favorites Collection" link="/favorites">
+      <MovieSection sectionTitle="✨ My Favorites Collection" link="/favorites">
         {favorites.length > 0 ? (
           favorites.map((movie) => (
             <Movie
@@ -157,7 +164,7 @@ const Home = () => {
         ))}
       </MovieSection>
 
-      <MovieSection sectionTitle="My Bookmarks Collection" link="/library">
+      <MovieSection sectionTitle="💫 My Bookmarks Collection" link="/library">
         {bookmarks.length > 0 ? (
           bookmarks.map((movie) => (
             <Movie

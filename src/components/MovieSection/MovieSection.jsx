@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import "./MovieSection.scss";
+import { Link } from "react-router-dom";
 import { HiArrowNarrowRight } from "react-icons/hi";
 
 const MovieSection = ({ sectionTitle, link, children }) => {

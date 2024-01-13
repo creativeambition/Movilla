@@ -19,7 +19,6 @@ const ResMovie = ({ content, onclick }) => {
           <div className="info">
             <span>{new Date(content?.release_date).getFullYear()}</span>
             <span>{Number(content?.vote_average).toPrecision(2)}</span>
-            <span>Movie</span>
           </div>
         </div>
       </div>

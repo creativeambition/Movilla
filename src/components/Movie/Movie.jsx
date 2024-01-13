@@ -12,19 +12,15 @@ const Movie = ({ movie_banner, type, link, content }) => {
     content?.original_name ||
     "loading...";
 
-  function handleClick() {
-    AddToBookmarks(content);
-  }
-
   return (
     <div className={`movie ${type}`} title={title}>
       <Link to={link}>
         <img src={movie_banner} alt="" loading="lazy" />
       </Link>
 
-      <div className="add_to_fav" title="Save for later" onClick={handleClick}>
+      {/* <div className="add_to_fav" title="Save for later" onClick={handleClick}>
         <HiOutlineBookmark className="icon" />
-      </div>
+      </div> */}
 
       <div className="details">
         <span className="title">{title}</span>

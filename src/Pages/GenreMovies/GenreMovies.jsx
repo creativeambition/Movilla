@@ -29,7 +29,7 @@ const GenreMovies = () => {
             key={movie.id}
             movie_banner={`https://image.tmdb.org/t/p/original${movie.poster_path}`}
             type="small"
-            link={`/${movie.media_type || "movie"}/${movie.id}`}
+            link={`/${movie.media_type || params.mediaType}/${movie.id}`}
             content={movie}
           />
         ))}

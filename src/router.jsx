@@ -1,13 +1,16 @@
+import { Suspense, lazy } from "react";
 import { createBrowserRouter } from "react-router-dom";
-import App from "./App";
-import Home from "./Pages/Home/Home";
-import Movies from "./Pages/Movies/Movies";
-import Favorites from "./Pages/Favorites/Favorites";
-import Library from "./Pages/Library/Library";
-import SingleMovie from "./Pages/SingleMovie/SingleMovie";
-import TVShows from "./Pages/TVShows/TVShows";
-import ErrorPage from "./Pages/ErrorPage/ErrorPage";
-import WatchPage from "./Pages/WatchPage/WatchPage";
+
+const App = lazy(() => import("./App"));
+const Home = lazy(() => import("./Pages/Home/Home"));
+const Movies = lazy(() => import("./Pages/Movies/Movies"));
+const Favorites = lazy(() => import("./Pages/Favorites/Favorites"));
+const Library = lazy(() => import("./Pages/Library/Library"));
+const SingleMovie = lazy(() => import("./Pages/SingleMovie/SingleMovie"));
+const TVShows = lazy(() => import("./Pages/TVShows/TVShows"));
+const ErrorPage = lazy(() => import("./Pages/ErrorPage/ErrorPage"));
+const WatchPage = lazy(() => import("./Pages/WatchPage/WatchPage"));
+
 import {
   AiringToday,
   MovieCredits,
@@ -20,10 +23,13 @@ import {
   Trending,
   Upcoming,
   WatchTrailer,
+  fetchBookmarks,
+  fetchFavorites,
   fetchGenres,
   fetchSingleGenreMovies,
 } from "./Data/Data";
 import GenreMovies from "./Pages/GenreMovies/GenreMovies";
+import Loading from "./components/Loading/Loading";
 
 async function DataLoader() {
   try {
@@ -106,48 +112,108 @@ async function WatchPageLoader({ params }) {
   }
 }
 
+async function favoritesLoader() {
+  const data = await fetchFavorites();
+
+  if (data.length > 0) {
+    return data;
+  }
+  return null;
+}
+
+async function LibLoader() {
+  const favData = await fetchFavorites();
+  const bookmarkData = await fetchBookmarks();
+
+  const data = { favData, bookmarkData };
+
+  return data;
+}
+
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: (
+      <Suspense fallback={<Loading />}>
+        <App />
+      </Suspense>
+    ),
     loader: DataLoader,
-    errorElement: <ErrorPage />,
+    errorElement: (
+      <Suspense fallback={<Loading />}>
+        <ErrorPage />
+      </Suspense>
+    ),
     id: "root",
 
     children: [
       {
         index: true,
-        element: <Home />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Home />
+          </Suspense>
+        ),
       },
       {
         path: "movies",
-        element: <Movies />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Movies />
+          </Suspense>
+        ),
       },
       {
         path: "tv",
-        element: <TVShows />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <TVShows />
+          </Suspense>
+        ),
       },
       {
         path: "favorites",
-        element: <Favorites />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Favorites />
+          </Suspense>
+        ),
+        loader: favoritesLoader,
       },
       {
         path: "library",
-        element: <Library />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <Library />
+          </Suspense>
+        ),
+        loader: LibLoader,
       },
       {
         path: "/:mediaType/:id",
         loader: SingleMovieLoader,
-        element: <SingleMovie />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <SingleMovie />
+          </Suspense>
+        ),
       },
       {
         path: "/:mediaType/all/:genre",
-        element: <GenreMovies />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <GenreMovies />
+          </Suspense>
+        ),
         loader: SingleGenreMoviesLoader,
       },
       {
         path: "/watch/:mediaType/:title/:id",
-        element: <WatchPage />,
+        element: (
+          <Suspense fallback={<Loading />}>
+            <WatchPage />
+          </Suspense>
+        ),
         loader: WatchPageLoader,
       },
     ],

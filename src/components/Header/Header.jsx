@@ -7,7 +7,6 @@ import { SharedContext } from "../../SharedContext";
 import { RiMenu4Fill } from "react-icons/ri";
 import { BiChevronLeft, BiSearchAlt } from "react-icons/bi";
 
-import spiderman_banner from "../../assets/movies/spider.jpg";
 import { Form, Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { Search } from "../../Data/Data";
@@ -47,9 +46,9 @@ const Header = () => {
     }
   }, [NavActive]);
 
-  function handleSubmit() {
-    if (SearchValue) {
-      Search(SearchValue).then((data) => {
+  function handleSubmit(value) {
+    if (value) {
+      Search(value).then((data) => {
         setSearchResult(data);
       });
     }
@@ -91,6 +90,7 @@ const Header = () => {
               disabled={!ActivateSearch}
               onChange={(e) => {
                 setSearchValue(e.target.value);
+                handleSubmit(e.target.value);
               }}
             />
           </Form>
@@ -115,11 +115,19 @@ const Header = () => {
             <span>search results for `{SearchValue}`</span>
 
             <div className="res_movies_wrapper">
-              <Suspense fallback={<Loading />}>
-                {searchResult?.map((res) => (
-                  <ResMovie key={res.id} content={res} onclick={handleClick} />
-                ))}
-              </Suspense>
+              {searchResult.length > 0 ? (
+                <Suspense fallback={<Loading />}>
+                  {searchResult?.map((res) => (
+                    <ResMovie
+                      key={res.id}
+                      content={res}
+                      onclick={handleClick}
+                    />
+                  ))}
+                </Suspense>
+              ) : (
+                <h5>:&lt; No data found</h5>
+              )}
             </div>
           </div>
         )}

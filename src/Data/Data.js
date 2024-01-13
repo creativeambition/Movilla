@@ -215,7 +215,9 @@ export async function fetchFavorites() {
 
 // Bookmark movie
 export async function AddToBookmarks(movie) {
-  const id = `${movie.id}`;
+  const id = `${mediaType}-${movie.id}`;
+
+  movie.media_type = movie.media_type || mediaType;
 
   try {
     const docRef = doc(db, "bookmarks", id);

@@ -143,6 +143,33 @@ const SingleMovie = () => {
 
               <hr />
 
+              {
+                params.mediaType == "tv" && <>
+                <div className="data">
+                <div className="key">Seasons</div>
+                <span>-</span>
+
+                <div className="val" title={data.movieDetails.number_of_seasons}>
+                  {data.movieDetails.number_of_seasons}
+                </div>
+              </div>
+
+              <hr />
+
+              <div className="data">
+                <div className="key">Episodes</div>
+                <span>-</span>
+
+                <div className="val" title={data.movieDetails.number_of_episodes}>
+                  {data.movieDetails.number_of_episodes}
+                </div>
+              </div>
+
+                </>
+              }
+
+              <hr />
+
               <div className="data">
                 <div className="key">Total Votes</div>
                 <span>-</span>
