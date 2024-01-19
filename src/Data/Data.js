@@ -1,6 +1,13 @@
 import axios from "axios";
 import { axiosInstance } from "./axios";
-import { addDoc, collection, doc, getDocs, setDoc } from "firebase/firestore";
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  doc,
+  getDocs,
+  setDoc,
+} from "firebase/firestore";
 import { db } from "../firebase";
 
 const apiKey = "6092a82e2b44efc996cd82a308128338";
@@ -187,7 +194,7 @@ export async function Search(queryString) {
     `/search/movie?query=${queryString}&api_key=${apiKey}`
   );
 
-  return response.data.results.slice(0, 5);
+  return response.data.results.slice(0, 8);
 }
 
 // Add movie to favorites
@@ -195,11 +202,12 @@ export async function AddToFavorites(movie, mediaType) {
   const id = `${mediaType}-${movie.id}`;
 
   movie.media_type = movie.media_type || mediaType;
+
   try {
     const docRef = doc(db, "favorites", id);
     return await setDoc(docRef, movie);
   } catch (err) {
-    console.log("An error occurred while connecting", err);
+    console.log("An error occurred", err);
   }
 }
 
@@ -214,7 +222,7 @@ export async function fetchFavorites() {
 }
 
 // Bookmark movie
-export async function AddToBookmarks(movie) {
+export async function AddToBookmarks(movie, mediaType) {
   const id = `${mediaType}-${movie.id}`;
 
   movie.media_type = movie.media_type || mediaType;
@@ -223,7 +231,18 @@ export async function AddToBookmarks(movie) {
     const docRef = doc(db, "bookmarks", id);
     return await setDoc(docRef, movie);
   } catch (err) {
-    console.log("An error occurred while connecting", err);
+    console.log("An error occurred", err);
+  }
+}
+
+export async function RemoveFromBookmarks(movie, mediaType) {
+  const id = `${mediaType}-${movie.id}`;
+
+  try {
+    const docRef = doc(db, "bookmarks", id);
+    return await deleteDoc(docRef);
+  } catch (err) {
+    console.log("An error occurred", err);
   }
 }
 

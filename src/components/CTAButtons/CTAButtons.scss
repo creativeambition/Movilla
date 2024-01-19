@@ -2,12 +2,12 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  gap: 28px;
+  gap: 24px;
   margin-top: 15px;
 
   @mixin button_base {
     height: 50px;
-    padding: 0 24px;
+    padding: 0 20px;
     border-radius: 12px;
     background-color: transparent;
     border: none;
@@ -42,8 +42,7 @@
     }
 
     &:nth-child(2) {
-      border: 2px solid var(--text-color-alt);
-      border-radius: 100px;
+      border: 2px solid var(--universal-color);
     }
   }
 }

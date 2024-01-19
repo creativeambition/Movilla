@@ -12,6 +12,7 @@ const MobileProfile = lazy(() =>
   import("./components/MobileProfile/MobileProfile")
 );
 import Loading from "./components/Loading/Loading";
+import Process from "./components/Process/Process";
 
 const MobileNavigation = lazy(() =>
   import("./components/MobileNavigation/MobileNavigation")
@@ -23,6 +24,10 @@ function App() {
   const [NavActive, setNavActive] = useState(false);
   const [ThemeOptions, setThemeOptions] = useState(false);
   const [ShowProfile, setShowProfile] = useState(false);
+  const [processing, setProcessing] = useState({
+    started: null,
+    success: null,
+  });
 
   const navigation = useNavigation();
 
@@ -64,6 +69,17 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    if (processing.success === true || processing.success === false) {
+      setTimeout(() => {
+        setProcessing({
+          started: null,
+          success: null,
+        });
+      }, 4000);
+    }
+  }, [processing]);
+
   return (
     <div
       className={`app ${theme}_theme ${
@@ -80,6 +96,8 @@ function App() {
           setThemeOptions,
           ShowProfile,
           setShowProfile,
+          processing,
+          setProcessing,
         }}
       >
         {mobileView ? (
@@ -98,6 +116,8 @@ function App() {
 
           <Header />
           <Profile />
+
+          {processing.started && <Process />}
 
           <ResetScrollPosition>
             <Outlet />

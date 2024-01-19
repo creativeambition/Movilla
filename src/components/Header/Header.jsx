@@ -18,7 +18,7 @@ const Header = () => {
   const [ActivateSearch, setActivateSearch] = useState(false);
   const [SearchValue, setSearchValue] = useState("");
 
-  const [searchResult, setSearchResult] = useState([]);
+  const [searchResult, setSearchResult] = useState(null);
 
   useEffect(() => {
     const header = document.querySelector(".app_header");
@@ -46,13 +46,25 @@ const Header = () => {
     }
   }, [NavActive]);
 
-  function handleSubmit(value) {
-    if (value) {
-      Search(value).then((data) => {
-        setSearchResult(data);
+  useEffect(() => {
+    if (SearchValue == "") {
+      setSearchResult(null);
+    }
+
+    let ignore = false;
+
+    if (SearchValue) {
+      Search(SearchValue).then((data) => {
+        if (!ignore) {
+          setSearchResult(data);
+        }
       });
     }
-  }
+
+    return () => {
+      ignore = true;
+    };
+  }, [SearchValue]);
 
   function handleClick() {
     setSearchValue("");
@@ -81,19 +93,16 @@ const Header = () => {
 
       <>
         <div className={`search field ${ActivateSearch && "active"}`}>
-          <Form className="form" onSubmit={handleSubmit}>
-            <input
-              type="text"
-              name="search"
-              placeholder="Search..."
-              value={SearchValue}
-              disabled={!ActivateSearch}
-              onChange={(e) => {
-                setSearchValue(e.target.value);
-                handleSubmit(e.target.value);
-              }}
-            />
-          </Form>
+          <input
+            type="text"
+            name="search"
+            placeholder="Search..."
+            value={SearchValue}
+            disabled={!ActivateSearch}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+            }}
+          />
 
           <button
             className="search_icon"
@@ -110,7 +119,7 @@ const Header = () => {
           </button>
         </div>
 
-        {SearchValue && (
+        {searchResult && (
           <div className="search_res">
             <span>search results for `{SearchValue}`</span>
 

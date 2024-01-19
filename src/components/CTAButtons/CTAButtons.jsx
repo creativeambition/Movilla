@@ -1,28 +1,40 @@
 import "./CTAButtons.scss";
 import { HiMiniPlay } from "react-icons/hi2";
 import { TbStar } from "react-icons/tb";
+import { MdArrowOutward } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { AddToFavorites } from "../../Data/Data";
-import { useState } from "react";
+import { useContext } from "react";
+import { SharedContext } from "../../SharedContext";
 
 const CTAButtons = ({ mediaType, movie, featured }) => {
+  const { setProcessing } = useContext(SharedContext);
+
   const title =
     movie?.title ||
     movie?.original_title ||
     movie?.name ||
     movie?.original_name;
 
-  const [fav, setFav] = useState(false);
-
   function handleClick() {
+    setProcessing({
+      started: true,
+      success: null,
+    });
+
     AddToFavorites(movie, mediaType)
-      .then((doc) => {
-        setFav(true);
-        alert("Successfully added to favorites");
+      .then(() => {
+        setProcessing({
+          started: true,
+          success: true,
+        });
       })
       .catch((err) => {
+        setProcessing({
+          started: true,
+          success: false,
+        });
         console.log("An error occurred", err);
-        alert("Unable to add to favorites");
       });
   }
 
@@ -31,8 +43,8 @@ const CTAButtons = ({ mediaType, movie, featured }) => {
       {featured ? (
         <Link to={`/${mediaType}/${movie?.id}`}>
           <button>
-            <HiMiniPlay className="icon play" />
-            <span>Do NOT !Click</span>
+            <MdArrowOutward className="icon play" />
+            <span>More info</span>
           </button>
         </Link>
       ) : (
@@ -46,11 +58,7 @@ const CTAButtons = ({ mediaType, movie, featured }) => {
 
       <button onClick={handleClick}>
         <TbStar className="icon" />
-        {fav ? (
-          <span>Remove from Favorites</span>
-        ) : (
-          <span>Add to Favorites</span>
-        )}
+        <span>Add to Favorites</span>
       </button>
     </div>
   );

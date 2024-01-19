@@ -42,7 +42,9 @@ const SingleMovie = () => {
           }}
         />
 
-        <h2 className="movie_title">{title}</h2>
+        <h2 className="movie_title" title={title}>
+          {title}
+        </h2>
 
         <div className="tools">
           <BiStar className="action_icon" />
@@ -143,30 +145,35 @@ const SingleMovie = () => {
 
               <hr />
 
-              {
-                params.mediaType == "tv" && <>
-                <div className="data">
-                <div className="key">Seasons</div>
-                <span>-</span>
+              {params.mediaType == "tv" && (
+                <>
+                  <div className="data">
+                    <div className="key">Seasons</div>
+                    <span>-</span>
 
-                <div className="val" title={data.movieDetails.number_of_seasons}>
-                  {data.movieDetails.number_of_seasons}
-                </div>
-              </div>
+                    <div
+                      className="val"
+                      title={data.movieDetails.number_of_seasons}
+                    >
+                      {data.movieDetails.number_of_seasons}
+                    </div>
+                  </div>
 
-              <hr />
+                  <hr />
 
-              <div className="data">
-                <div className="key">Episodes</div>
-                <span>-</span>
+                  <div className="data">
+                    <div className="key">Episodes</div>
+                    <span>-</span>
 
-                <div className="val" title={data.movieDetails.number_of_episodes}>
-                  {data.movieDetails.number_of_episodes}
-                </div>
-              </div>
-
+                    <div
+                      className="val"
+                      title={data.movieDetails.number_of_episodes}
+                    >
+                      {data.movieDetails.number_of_episodes}
+                    </div>
+                  </div>
                 </>
-              }
+              )}
 
               <hr />
 
