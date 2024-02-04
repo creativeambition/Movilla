@@ -34,14 +34,14 @@ const Home = () => {
 
   useEffect(() => {
     fetchFavorites()
-      .then((data) => setFavorites(data))
+      .then((data) => setFavorites(data.slice(0, 6)))
       .catch((err) => {
         console.log("An error occurred while fetching favorites", err);
         alert("Unable to fetch favorites");
       });
 
     fetchBookmarks()
-      .then((data) => setBookmarks(data))
+      .then((data) => setBookmarks(data.slice(0, 6)))
       .catch((err) => {
         console.log("An error occurred while fetching favorites", err);
         alert("Unable to fetch favorites");
@@ -93,9 +93,21 @@ const Home = () => {
         <Genre link={"/movie/all/Family"} banner={family} category="Family" />
         <Genre link={"/movie/all/Horror"} banner={horror} category="Horror" />
         <Genre link={"/movie/all/Music"} banner={music} category="Music" />
-        <Genre link={"/movie/all/Mystery"} banner={mystery} category="Mystery" />
-        <Genre link={"/movie/all/TV Movie"} banner={tvmovie} category="TV Movie" />
-        <Genre link={"/movie/all/Thriller"} banner={thriller} category="Thriller" />
+        <Genre
+          link={"/movie/all/Mystery"}
+          banner={mystery}
+          category="Mystery"
+        />
+        <Genre
+          link={"/movie/all/TV Movie"}
+          banner={tvmovie}
+          category="TV Movie"
+        />
+        <Genre
+          link={"/movie/all/Thriller"}
+          banner={thriller}
+          category="Thriller"
+        />
       </MovieSection>
 
       <MovieSection sectionTitle="✨ My Favorites Collection" link="/favorites">

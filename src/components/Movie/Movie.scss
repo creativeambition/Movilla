@@ -147,8 +147,9 @@
 @media (max-width: 600px) {
   .movie {
     &.small {
-      min-width: max(100px, 31%);
+      min-width: max(100px, 30%);
       max-width: max(100px, 31%);
+      flex-grow: 1;
       height: 180px;
       padding: 5px;
 

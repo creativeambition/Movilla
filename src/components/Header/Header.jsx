@@ -7,7 +7,7 @@ import { SharedContext } from "../../SharedContext";
 import { RiMenu4Fill } from "react-icons/ri";
 import { BiChevronLeft, BiSearchAlt } from "react-icons/bi";
 
-import { Form, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Loading from "../Loading/Loading";
 import { Search } from "../../Data/Data";
 const ResMovie = lazy(() => import("../SearchResMovie/ResMovie"));
@@ -47,13 +47,11 @@ const Header = () => {
   }, [NavActive]);
 
   useEffect(() => {
-    if (SearchValue == "") {
-      setSearchResult(null);
-    }
-
     let ignore = false;
 
-    if (SearchValue) {
+    if (SearchValue == "") {
+      setSearchResult(null);
+    } else {
       Search(SearchValue).then((data) => {
         if (!ignore) {
           setSearchResult(data);
