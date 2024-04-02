@@ -10,7 +10,8 @@ import {
 } from "firebase/firestore";
 import { db } from "../firebase";
 
-const apiKey = "6092a82e2b44efc996cd82a308128338";
+// Create your account on TMDB and obtain your api key
+const apiKey = "...";
 
 // Movies
 
